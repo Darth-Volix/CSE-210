@@ -8,6 +8,7 @@ class Program
 
         do
         {
+            // Generate a random number between 1 and 100
             Random randomGenerator = new Random();
             int number = randomGenerator.Next(1, 100);
 
@@ -28,17 +29,22 @@ class Program
 
                 if (user_guess < number)
                 {
-                Console.WriteLine("Higher");
+                    // Provide feedback if the guess is too low
+                    Console.WriteLine("Higher");
                 }
                 else if (user_guess > number)
                 {
-                Console.WriteLine("Lower");
+                    // Provide feedback if the guess is too high
+                    Console.WriteLine("Lower");
                 }
                 else
                 {
-                Console.WriteLine("You guessed it!");
-                Console.WriteLine("");
-                Console.WriteLine($"You did it in {guess_count} tries!");
+                    // Congratulate the user when they guess correctly
+                    Console.WriteLine("You guessed it!");
+                    Console.WriteLine("");
+
+                    // Display the number of attempts
+                    Console.WriteLine($"You did it in {guess_count} tries!");
                 }
             }
 
