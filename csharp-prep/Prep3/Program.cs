@@ -4,30 +4,49 @@ class Program
 {
     static void Main(string[] args)
     {
-       Random randomGenerator = new Random();
-       int number = randomGenerator.Next(1, 11);
+        string response = "yes";
 
-       Console.WriteLine("Welcome to the Magic Number Guessing Game!");
+        do
+        {
+            Random randomGenerator = new Random();
+            int number = randomGenerator.Next(1, 100);
 
-       string user_input;
-       int user_guess;
+            Console.WriteLine("");
+            Console.WriteLine("Welcome to the Magic Number Guessing Game!");
 
-       Console.Write("What is your guess? ");
-       user_input = Console.ReadLine();
-       user_guess= int.Parse(user_input);
+            string user_input;
+            int user_guess = 0;
+            int guess_count = 0;
 
-       if (user_guess < number)
-       {
-        Console.WriteLine("Higher");
-       }
-       else if (user_guess > number)
-       {
-        Console.WriteLine("Lower");
-       }
-       else
-       {
-        Console.WriteLine("You guessed it!");
-       }
+            while (user_guess != number)
+            {
+                Console.Write("What is your guess? ");
+                user_input = Console.ReadLine();
+                user_guess= int.Parse(user_input);
 
+                guess_count++;
+
+                if (user_guess < number)
+                {
+                Console.WriteLine("Higher");
+                }
+                else if (user_guess > number)
+                {
+                Console.WriteLine("Lower");
+                }
+                else
+                {
+                Console.WriteLine("You guessed it!");
+                Console.WriteLine("");
+                Console.WriteLine($"You did it in {guess_count} tries!");
+                }
+            }
+
+            Console.WriteLine("");
+            Console.Write("Would you like to play again? ");
+            response = Console.ReadLine();
+
+        } while (response == "yes");
+        
     }
 }
