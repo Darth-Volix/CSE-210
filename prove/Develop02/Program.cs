@@ -2,8 +2,17 @@ using System;
 
 class Program
 {
-    static void Main(string[] args)
+    // Metod to create a new journal entry
+    public static JournalEntry CreateJournalEntry()
     {
-        Console.WriteLine("Hello Develop02 World!");
+        JournalEntry entry = new JournalEntry();
+        entry.SetPrompt();
+        entry.SetDateTime();
+        entry.SetEntry();
+        entry.DisplayEntry();
+
+        return entry;
     }
+
+
 }
