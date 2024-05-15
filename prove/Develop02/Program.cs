@@ -30,7 +30,7 @@ class Program
             {
                 foreach (JournalEntry entry in journal._journalEntries)
                 {
-                    sw.WriteLine($"{entry._entryDateTime}\\{entry._entryPrompt}\\{entry._entry}"
+                    sw.WriteLine($"{entry._entryDateTime}\\{entry._entryPrompt}\\{entry._entry}");
                 }
             }
         }
