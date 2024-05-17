@@ -58,7 +58,10 @@ class Program
                     running = false;
                     break;
                 default:
+                    // Invalid choice
+                    Console.WriteLine("");
                     Console.WriteLine("Invalid choice. Please try again.");
+                    Console.WriteLine("");
                     break;
             }
         }
