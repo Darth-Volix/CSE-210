@@ -17,7 +17,6 @@ public class Journal
     {
         Console.WriteLine("");
         Console.WriteLine("Journal Entries:");
-        Console.WriteLine("");
         foreach (JournalEntry entry in _journalEntries)
         {
             entry.DisplayEntry();
@@ -27,24 +26,16 @@ public class Journal
     // Method to save journal to a text file 
     public static void SaveToFile(Journal journal)
     {
-        try
+        // Prompt the user for a file name
+        Console.Write("Enter the name of the file to save to: ");
+        string fileName = Console.ReadLine();
+        // Write the journal entries to the file
+        using (StreamWriter sw = File.CreateText(fileName))
         {
-            // Prompt the user for a file name
-            Console.Write("Enter the name of the file to save to: ");
-            string fileName = Console.ReadLine();
-
-            // Write the journal entries to the file
-            using (StreamWriter sw = File.CreateText(fileName))
+            foreach (JournalEntry entry in journal._journalEntries)
             {
-                foreach (JournalEntry entry in journal._journalEntries)
-                {
-                    sw.WriteLine($"{entry._entryDateTime}^{entry._entryPrompt}^{entry._entry}");
-                }
+                sw.WriteLine($"{entry._entryDateTime}^{entry._entryPrompt}^{entry._entry}");
             }
-        }
-        catch (FileNotFoundException)
-        {
-            Console.WriteLine("File not found.");
         }
     }
 
@@ -77,7 +68,9 @@ public class Journal
         }
         catch (FileNotFoundException)
         {
+            Console.WriteLine("");
             Console.WriteLine("File not found.");
+            Console.WriteLine("");
             return null;
         }
     }

@@ -39,7 +39,6 @@ public class JournalEntry
     // method to display the entry
     public void DisplayEntry()
     {
-        Console.WriteLine("");
         Console.WriteLine("==================================================================================");
         Console.WriteLine(_entryDateTime);
         Console.WriteLine("");
