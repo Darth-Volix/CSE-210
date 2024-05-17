@@ -12,6 +12,24 @@ public class Journal
         _journalEntries.Add(entry);
     }
 
+    // method to delete the last journal entry
+    public void DeleteLastEntry(Journal journal)
+    {
+        if (journal._journalEntries.Count > 0)
+        {
+            journal._journalEntries.RemoveAt(journal._journalEntries.Count - 1);
+            Console.WriteLine("");
+            Console.WriteLine("Last entry deleted.");
+            Console.WriteLine("");
+        }
+        else
+        {
+            Console.WriteLine("");
+            Console.WriteLine("No entries to delete.");
+            Console.WriteLine("");
+        }
+    }
+
     // method to display journal entries
     public void DisplayJournalEntries()
     {
