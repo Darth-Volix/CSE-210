@@ -3,18 +3,6 @@ using System.IO;
 
 class Program
 {
-    // Metod to create a new journal entry
-    public static JournalEntry CreateJournalEntry()
-    {
-        JournalEntry entry = new JournalEntry();
-        entry.SetPrompt();
-        entry.SetDateTime();
-        entry.SetEntry();
-        entry.DisplayEntry();
-
-        return entry;
-    }
-
     // Method to save journal to a text file 
     public static void SaveToFile(Journal journal)
     {
@@ -102,7 +90,7 @@ class Program
             // Perform the selected action
             if (choice == "1")
             {
-                JournalEntry newEntry = CreateJournalEntry();
+                JournalEntry newEntry = JournalEntry.CreateJournalEntry();
                 activeJournal.StoreJournalEntry(newEntry);
             }
             else if (choice == "2")
