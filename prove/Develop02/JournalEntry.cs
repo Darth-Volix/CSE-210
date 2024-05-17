@@ -22,17 +22,16 @@ public class JournalEntry
     // method to get the date and time
     public void SetDateTime()
     {
-        Console.WriteLine("Enter the date and time of the entry: ");
+        Console.WriteLine("");
+        Console.Write("Enter the date and time of the entry: ");
         _entryDateTime = Console.ReadLine();
     }
 
     // method to get the entry from the user
     public void SetEntry()
     {
-        Console.WriteLine("Today's Prompt:");
-        Console.WriteLine(_entryPrompt);
-        Console.WriteLine("Enter your entry:")
-        Console.WriteLine("");
+        Console.WriteLine("Today's Prompt: " + _entryPrompt);
+        Console.Write("Enter your entry:");
         _entry = Console.ReadLine();
     }
 
