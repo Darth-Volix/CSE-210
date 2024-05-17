@@ -21,39 +21,45 @@ class Program
             Console.WriteLine("");
             Console.WriteLine("1. Create a new journal entry");
             Console.WriteLine("2. Display journal entries");
-            Console.WriteLine("3. Save journal to a file");
-            Console.WriteLine("4. Load journal from a file");
-            Console.WriteLine("5. Exit");
+            Console.WriteLine("3. Delete Last Entry");
+            Console.WriteLine("4. Save journal to a file");
+            Console.WriteLine("5. Load journal from a file");
+            Console.WriteLine("6. Exit");
             Console.WriteLine("");
             Console.Write("Enter your choice: ");
             string choice = Console.ReadLine();
 
-
             // Perform the selected action
-            if (choice == "1")
+            switch (choice)
             {
-                JournalEntry newEntry = JournalEntry.CreateJournalEntry();
-                activeJournal.StoreJournalEntry(newEntry);
-            }
-            else if (choice == "2")
-            {
-                activeJournal.DisplayJournalEntries();
-            }
-            else if (choice == "3")
-            {
-                Journal.SaveToFile(activeJournal);
-            }
-            else if (choice == "4")
-            {
-                activeJournal = Journal.LoadFromFile();
-            }
-            else if (choice == "5")
-            {
-                running = false;
-            }
-            else
-            {
-                Console.WriteLine("Invalid choice. Please try again.");
+                case "1":
+                    // Create a new journal entry
+                    JournalEntry newEntry = JournalEntry.CreateJournalEntry();
+                    activeJournal.StoreJournalEntry(newEntry);
+                    break;
+                case "2":
+                    // Display all journal entries
+                    activeJournal.DisplayJournal();
+                    break;
+                case "3":
+                    // Delete last journal entry
+                    activeJournal.DeleteLastEntry();
+                    break;
+                case "4":
+                    // Save journal to a file
+                    Journal.SaveToFile(activeJournal);
+                    break;
+                case "5":
+                    // Load journal from a file
+                    activeJournal = Journal.LoadFromFile();
+                    break;
+                case "6":
+                    // Exit the program
+                    running = false;
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice. Please try again.");
+                    break;
             }
         }
     }
