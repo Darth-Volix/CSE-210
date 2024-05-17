@@ -39,7 +39,7 @@ class Program
                     break;
                 case "2":
                     // Display all journal entries
-                    activeJournal.DisplayJournal();
+                    activeJournal.DisplayJournalEntries();
                     break;
                 case "3":
                     // Delete last journal entry

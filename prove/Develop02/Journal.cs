@@ -13,11 +13,11 @@ public class Journal
     }
 
     // method to delete the last journal entry
-    public void DeleteLastEntry(Journal journal)
+    public void DeleteLastEntry()
     {
-        if (journal._journalEntries.Count > 0)
+        if (_journalEntries.Count > 0)
         {
-            journal._journalEntries.RemoveAt(journal._journalEntries.Count - 1);
+            _journalEntries.RemoveAt(_journalEntries.Count - 1);
             Console.WriteLine("");
             Console.WriteLine("Last entry deleted.");
             Console.WriteLine("");
@@ -33,11 +33,21 @@ public class Journal
     // method to display journal entries
     public void DisplayJournalEntries()
     {
-        Console.WriteLine("");
-        Console.WriteLine("Journal Entries:");
-        foreach (JournalEntry entry in _journalEntries)
+        if (_journalEntries.Count == 0)
         {
-            entry.DisplayEntry();
+            Console.WriteLine("");
+            Console.WriteLine("No entries to display.");
+            Console.WriteLine("");
+            return;
+        }
+        else 
+        {
+            Console.WriteLine("");
+            Console.WriteLine("Journal Entries:");
+            foreach (JournalEntry entry in _journalEntries)
+            {
+                entry.DisplayEntry();
+            }
         }
     }
 
