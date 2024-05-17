@@ -31,7 +31,7 @@ public class JournalEntry
     public void SetEntry()
     {
         Console.WriteLine("Today's Prompt: " + _entryPrompt);
-        Console.Write("Enter your entry:");
+        Console.Write("Enter your entry: ");
         _entry = Console.ReadLine();
     }
 
