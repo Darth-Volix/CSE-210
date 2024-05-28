@@ -24,4 +24,19 @@ public class Word
     {
         return _isHidden;
     }
+
+    // method to display the word
+    public void DisplayWord()
+    {
+        if (_isHidden)
+        {
+            for (int i = 0; i < _text.Length; i++)
+            {
+                Console.Write("_")
+        }
+        else
+        {
+            Console.Write($"{_text} ");
+        }
+    }
 }

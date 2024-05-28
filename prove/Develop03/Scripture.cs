@@ -43,12 +43,18 @@ public class Scripture
     }
 
     //method to display the scripture
-    public void display()
+    public void DisplayScripture()
     {
         // clear the console
         Console.Clear();
 
         // display the reference 
-        Console.WriteLine($"{_reference._book} {_reference._chapter}:{_reference._startVerse}-{_reference._endVerse}");
+        Console.Write($"{_reference.DisplayReference()} - ");
+
+        // display the verse 
+        foreach (Word word in _verse)
+        {
+            if 
+        }
     }
 }
