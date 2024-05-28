@@ -13,4 +13,32 @@ public class Scripture
         _reference = reference;
         _verse = verse;
     }
+
+    // method to hide words in the scripture
+    public void HideWords()
+    {
+        while wordsHidden < 3
+        {
+            Random random = new Random()
+            int hiddenWord = random.Next(0, _verse.Count);
+            if (!_verse[hiddenWord].IsWordHidden())
+            {
+                _verse[hiddenWord].HideWord();
+                wordsHidden++;
+            }
+        }
+    }
+
+    // method to check if all words are hidden
+    public bool AreAllWordsHidden()
+    {
+        foreach (Word word in _verse)
+        {
+            if (!word.IsWordHidden())
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 }
