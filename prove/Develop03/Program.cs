@@ -91,6 +91,7 @@ class Program
                     case 2:
                         
                         // ask if there are multiple verses
+                        Console.WriteLine("");
                         Console.Write("Are there multiple verses? (yes/no): ");
                         string multipleVerses = Console.ReadLine();
 
