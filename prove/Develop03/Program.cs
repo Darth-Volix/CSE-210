@@ -29,7 +29,7 @@ class Program
                 {
                     case 1:
                         // create the reference
-                        Reference reference = new Reference("John", 3, 16);
+                        Reference reference = new Reference("John", "3", "16");
 
                         // create the words
                         List<Word> verse = new List<Word>();
@@ -89,33 +89,18 @@ class Program
                         break;
 
                     case 2:
+                        
                         // ask if there are multiple verses
                         Console.Write("Are there multiple verses? (yes/no): ");
                         string multipleVerses = Console.ReadLine();
 
                         if (multipleVerses == "yes")
                         {
-                            // get the book
-                            Console.Write("Enter the book: ");
-                            string book = Console.ReadLine();
-
-                            // get the chapter
-                            Console.Write("Enter the chapter: ");
-                            int chapter = int.Parse(Console.ReadLine());
-
-                            // get the start verse
-                            Console.Write("Enter the starting verse number: ");
-                            int startVerse = int.Parse(Console.ReadLine());
-
-                            // get the end verse
-                            Console.Write("Enter the ending verse number: ");
-                            int endVerse = int.Parse(Console.ReadLine());
-
                             // create the reference
-                            Reference reference2 = new Reference(book, chapter, startVerse, endVerse);
+                            Reference reference2 = Reference.MultiVerseReferenceInput();
 
                             // have the user type in the verse
-                            Console.WriteLine("Please type in words of the verses: ");
+                            Console.Write("Please type in words of the verses: ");
                             string verseText = Console.ReadLine();
 
                             // split the verse into words
@@ -160,23 +145,11 @@ class Program
                         }
                         else
                         {
-                            // get the book
-                            Console.Write("Enter the book: ");
-                            string book = Console.ReadLine();
-
-                            // get the chapter
-                            Console.Write("Enter the chapter: ");
-                            int chapter = int.Parse(Console.ReadLine());
-
-                            // get the verse
-                            Console.Write("Enter the verse number: ");
-                            int verseNumber = int.Parse(Console.ReadLine());
-
-                            // create the reference
-                            Reference reference3 = new Reference(book, chapter, verseNumber);
+                            // get the single verse reference from the user
+                            Reference reference3 = Reference.SingleVerseReferenceInput();
 
                             // have the user type in the verse
-                            Console.WriteLine("Please type in words of the verse: ");
+                            Console.Write("Please type in words of the verse: ");
                             string verseText = Console.ReadLine();
 
                             // split the verse into words
@@ -222,12 +195,19 @@ class Program
                         break;
 
                     case 3:
+                        
                         // set running to false to exit the program
                         running = false;
+
+                        // display a goodbye message
+                        Console.WriteLine("");
+                        Console.WriteLine("Goodbye! Thank you for using the Scripture Memory App!");
+                        Console.WriteLine("");
 
                         break;
 
                     default:
+                       
                         // display an error message if the user's choice is not valid
                         Console.WriteLine("");
                         Console.WriteLine("Invalid choice. Please try again.");

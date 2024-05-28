@@ -17,12 +17,26 @@ public class Scripture
     // method to hide words in the scripture
     public void HideWords()
     {
-        int totalWords = _verse.Count;
-        int totalWordsHidden = 0;
+        // initialize the variables for the HideWords method
         int wordsHidden = 0;
-        int wordsRemaining = totalWords - totalWordsHidden;
+        int hiddenWords = 0;
+        int totalWords = _verse.Count;
+        int wordsRemaining;
 
-        if (wordsRemaining > 3)
+        // count the number of hidden words
+        foreach (Word word in _verse)
+        {
+            if (word.IsWordHidden())
+            {
+                hiddenWords++;
+            }
+        }
+
+        // calculate the number of words remaining
+        wordsRemaining = totalWords - hiddenWords;
+
+        // hide the words in the scripture
+        if (wordsRemaining >= 3)
         {
             while (wordsHidden < 3)
             {
@@ -32,20 +46,16 @@ public class Scripture
                 {
                     _verse[hiddenWord].HideWord();
                     wordsHidden++;
-                    totalWordsHidden++;
                 }
-            }
+            }   
         }
         else
         {
-            while (wordsHidden < wordsRemaining)
+            foreach (Word word in _verse)
             {
-                Random random = new Random();
-                int hiddenWord = random.Next(0, _verse.Count);
-                if (!_verse[hiddenWord].IsWordHidden())
+                if (!word.IsWordHidden())
                 {
-                    _verse[hiddenWord].HideWord();
-                    wordsHidden++;
+                    word.HideWord();
                 }
             }
         }
