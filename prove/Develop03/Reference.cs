@@ -26,4 +26,17 @@ public class Reference
         _endVerse = endVerse;
     }  
 
+    // method to display the reference
+    public void DisplayReference()
+    {
+        if (_startVerse == _endVerse)
+        {
+            (Console.WriteLine($"{_book} {_chapter}:{_startVerse}"));
+        }    
+        else
+        {
+            (Console.WriteLine($"{_book} {_chapter}:{_startVerse}-{_endVerse}"));
+        }
+    }
+
 }

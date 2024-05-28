@@ -41,4 +41,14 @@ public class Scripture
         }
         return true;
     }
+
+    //method to display the scripture
+    public void display()
+    {
+        // clear the console
+        Console.Clear();
+
+        // display the reference 
+        Console.WriteLine($"{_reference._book} {_reference._chapter}:{_reference._startVerse}-{_reference._endVerse}");
+    }
 }
