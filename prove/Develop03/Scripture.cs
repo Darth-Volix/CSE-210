@@ -54,7 +54,7 @@ public class Scripture
         // display the verse 
         foreach (Word word in _verse)
         {
-            if 
+            word.DisplayWord();
         }
     }
 }

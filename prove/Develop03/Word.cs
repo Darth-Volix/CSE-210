@@ -33,6 +33,8 @@ public class Word
             for (int i = 0; i < _text.Length; i++)
             {
                 Console.Write("_")
+
+            Console.Write(" ");
         }
         else
         {
