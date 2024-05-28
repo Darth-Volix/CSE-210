@@ -1,9 +1,19 @@
 using System;
+using System.Collections.Generic;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Develop03 World!");
+        bool running = true;
+        while (running)
+        {
+            Console.WriteLine("");
+            Console.WriteLine("Welcome to the Scripture Memory App!");
+            Console.WriteLine("");
+            Console.WriteLine("Please choose from the following options: ");
+            
+
+        }
     }
 }
