@@ -26,9 +26,10 @@ public class MindfulnessActivity
         PauseWithSpinner(3);
         Console.WriteLine("Description: " + _description);
         PauseWithSpinner(3);
-        Console.WriteLine("Prepare to begin......");
-        PauseWithSpinner(5);
         Console.Clear();
+        Console.WriteLine("Get Ready......");
+        PauseWithSpinner(5);
+        Concole.WriteLine("");
     }
 
     public void End()
