@@ -4,8 +4,8 @@ using System.Threading;
 public class ReflectionActivity : MindfulnessActivity
 {
     // Attributes
-    private List<string> _prompts = new List<string>();
-    private List<string> _questions = new List<string>();
+    private List<string> _prompts;
+    private List<string> _questions;
 
     // Constructor
     public ReflectionActivity(string name, string description) : base(name, description)
