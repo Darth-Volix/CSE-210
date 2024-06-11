@@ -24,12 +24,13 @@ public class MindfulnessActivity
         Console.WriteLine("");
         Console.WriteLine("Starting the activity: " + _name);
         PauseWithSpinner(3);
+        Console.WriteLine("");
         Console.WriteLine("Description: " + _description);
         PauseWithSpinner(3);
         Console.Clear();
         Console.WriteLine("Get Ready......");
         PauseWithSpinner(5);
-        Concole.WriteLine("");
+        Console.WriteLine("");
     }
 
     public void End()
@@ -37,6 +38,7 @@ public class MindfulnessActivity
         Console.WriteLine("");
         Console.WriteLine("Well done!!");
         PauseWithSpinner(3);
+        Console.WriteLine("");
         Console.WriteLine($"You have completed another {_duration} seconds of the {_name}.");
         PauseWithSpinner(3);
         Console.Clear();

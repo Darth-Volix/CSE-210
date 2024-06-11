@@ -29,7 +29,7 @@ public class BreathingActivity : MindfulnessActivity
             Console.Write("1");
             Thread.Sleep(1000);
             Console.Write("\b \b");
-            Console.Write("Breathe out...6");
+            Console.Write("\nBreathe out...6");
             Thread.Sleep(1000);
             Console.Write("\b \b");
             Console.Write("5");
@@ -47,7 +47,14 @@ public class BreathingActivity : MindfulnessActivity
             Console.Write("1");
             Thread.Sleep(1000);
             Console.Write("\b \b");
-            Concole.WriteLine("");    
+            counter = counter + 10;    
         }
+    }
+
+    public void Run()
+    {
+        Start();
+        PracticeBreathing(_duration);
+        End();
     }
 }
