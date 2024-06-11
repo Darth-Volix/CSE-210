@@ -27,10 +27,10 @@ public class ListingActivity : MindfulnessActivity
         int _promptIndex = rnd.Next(_prompts.Count);
         string _randomPrompt = _prompts[_promptIndex];
 
-        Console.WriteLine("");
         Console.WriteLine("List as many responses as you can to the following prompt: ");
         Console.WriteLine($" --- {_randomPrompt} --- ");
         Console.Write("You may begin in: 5");
+        Thread.Sleep(1000);
         Console.Write("\b \b");
         Console.Write("4");
         Thread.Sleep(1000);
@@ -44,7 +44,7 @@ public class ListingActivity : MindfulnessActivity
         Console.Write("1");
         Thread.Sleep(1000);
         Console.Write("\b \b");
-        Console.Clear();
+        Console.WriteLine("");
 
         DateTime start = DateTime.Now;
         DateTime end = start.AddSeconds(_duration);
@@ -55,7 +55,6 @@ public class ListingActivity : MindfulnessActivity
         {
             Console.Write("> ");
             string response = Console.ReadLine();
-            Console.WriteLine("");
             listCount++;
             currentTime = DateTime.Now;
         }

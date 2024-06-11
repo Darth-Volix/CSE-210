@@ -38,17 +38,15 @@ public class ReflectionActivity : MindfulnessActivity
         int _promptIndex = rnd.Next(_prompts.Count);
         string _randomPrompt = _prompts[_promptIndex];
 
-        Console.WriteLine("");
         Console.WriteLine("Consider the following prompt:");
         Console.WriteLine("");
         Console.WriteLine($" --- {_randomPrompt} --- ");
         Console.WriteLine("");
         Console.WriteLine("When you have something in mind, press enter to continue.");
         Console.ReadLine();
-        Console.WriteLine("");
         Console.WriteLine("Now, ponder on each of the following questions as they related to this experience.");
-        Console.WriteLine("");
         Console.Write("You may begin in: 5");
+        Thread.Sleep(1000);
         Console.Write("\b \b");
         Console.Write("4");
         Thread.Sleep(1000);
@@ -71,7 +69,7 @@ public class ReflectionActivity : MindfulnessActivity
             int _questionIndex = random.Next(_questions.Count);
             string _randomQuestion = _questions[_questionIndex];
 
-            Console.Write($"> {_randomQuestion}");
+            Console.Write($"> {_randomQuestion} ");
             PauseWithSpinner(15);
             Console.WriteLine("");
             counter = counter + 15;

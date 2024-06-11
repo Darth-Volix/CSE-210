@@ -16,7 +16,6 @@ public class BreathingActivity : MindfulnessActivity
         int counter = 0;
         while (counter < _duration)
         {
-            Console.WriteLine("");
             Console.Write("Breathe in...4");
             Thread.Sleep(1000);
             Console.Write("\b \b");
@@ -47,6 +46,7 @@ public class BreathingActivity : MindfulnessActivity
             Console.Write("1");
             Thread.Sleep(1000);
             Console.Write("\b \b");
+            Console.WriteLine("");
             Console.WriteLine("");
             counter = counter + 10;    
         }

@@ -27,7 +27,7 @@ public class MindfulnessActivity
         _duration = int.Parse(Console.ReadLine());
         Console.WriteLine("");
         Console.Clear();
-        Console.WriteLine("Get Ready......");
+        Console.WriteLine("Get Ready...");
         PauseWithSpinner(5);
         Console.WriteLine("");
     }
