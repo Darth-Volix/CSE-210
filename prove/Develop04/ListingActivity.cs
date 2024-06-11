@@ -4,7 +4,7 @@ using System.Threading;
 public class ListingActivity : MindfulnessActivity 
 {
     // Attributes 
-    private List<string> _prompts = new List<string>();
+    private List<string> _prompts;
 
     // Constructor
     public ListingActivity(string name, string description) : base(name, description)
@@ -18,6 +18,49 @@ public class ListingActivity : MindfulnessActivity
             "When have you felt the Holy Ghost this month?",
             "Who are some of your personal heroes?"
         };
+    }
+
+    // Methods
+    public void PracticeListing(int _duration)
+    {
+        Random rnd = new Random();
+        int _promptIndex = rnd.Next(_prompts.Count);
+        string _randomPrompt = _prompts[_promptIndex];
+
+        Console.WriteLine("");
+        Console.WriteLine("List as many responses as you can to the following prompt: ");
+        Console.WriteLine($" --- {_randomPrompt} --- ");
+        Console.Write("You may begin in: 5");
+        Console.Write("\b \b");
+        Console.Write("4");
+        Thread.Sleep(1000);
+        Console.Write("\b \b");
+        Console.Write("3");
+        Thread.Sleep(1000);
+        Console.Write("\b \b");
+        Console.Write("2");
+        Thread.Sleep(1000);
+        Console.Write("\b \b");
+        Console.Write("1");
+        Thread.Sleep(1000);
+        Console.Write("\b \b");
+        Console.Clear();
+
+        DateTime start = DateTime.Now;
+        DateTime end = start.AddSeconds(_duration);
+
+        DateTime currentTime = DateTime.Now;
+        int listCount = 0;
+        while (currentTime < end)
+        {
+            Console.Write("> ");
+            string response = Console.ReadLine();
+            Console.WriteLine("");
+            listCount++;
+            currentTime = DateTime.Now;
+        }
+
+        Console.WriteLine($"You listed {listCount} items!");
     }
 
     public void Run()

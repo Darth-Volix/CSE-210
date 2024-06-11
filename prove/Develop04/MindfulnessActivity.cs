@@ -19,11 +19,11 @@ public class MindfulnessActivity
     public void Start()
     {
         Console.WriteLine("");
-        Console.WriteLine("Welcome to the "+ _name);
+        Console.WriteLine($"Welcome to the {_name}.");
         Console.WriteLine("");
         Console.WriteLine(_description);
         Console.WriteLine("");
-        onsole.Write("How long, in seconds, would you like for your session?: ");
+        Console.Write("How long, in seconds, would you like for your session?: ");
         _duration = int.Parse(Console.ReadLine());
         Console.WriteLine("");
         Console.Clear();
