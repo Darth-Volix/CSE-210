@@ -19,24 +19,45 @@ public class MindfulnessActvity
     {
         Console.WriteLine("");
         Console.Write("Enter the desired duration of your session in seconds: ");
-        _duration = int.Parse(Console.Readline());
+        _duration = int.Parse(Console.ReadLine());
         Console.WriteLine("");
         Console.WriteLine("Starting the activity: " + _name);
-        Console.WriteLine("");
-        PauseWithSpinner(2);
+        PauseWithSpinner(3);
         Console.WriteLine("Description: " + _description);
-        Console.WriteLine("");
-        PauseWithSpinner(2);
+        PauseWithSpinner(3);
         Console.WriteLine("Prepare to begin......");
-        Console.WriteLine("");
         PauseWithSpinner(5);
+        Console.Clear();
     }
 
     public void End()
     {
         Console.WriteLine("");
         Console.WriteLine("Well done!!");
-        PauseWithSpinner(2);
+        PauseWithSpinner(3);
         Console.WriteLine($"You have completed another {_duration} seconds of the {_name}.");
+        PauseWithSpinner(3);
+        Console.Clear();
+    }
+
+    public void PauseWithSpinner(int seconds)
+    {
+        int counter = 0;
+        while (counter < seconds)
+        {
+            Console.Write("-");
+            Thread.Sleep(250);
+            Console.Write("\b \b");
+            Console.Write("\\");
+            Thread.Sleep(250);
+            Console.Write("\b \b");
+            Console.Write("|");
+            Thread.Sleep(250);
+            Console.Write("\b \b");
+            Console.Write("/");
+            Thread.Sleep(250);
+            Console.Write("\b \b");
+            counter++;
+        }
     }
 }

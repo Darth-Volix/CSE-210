@@ -4,6 +4,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Develop04 World!");
+        MindfulnessActivity mindfulnessActivity = new MindfulnessActivity("Mindful Breathing", "Focus on your breath to calm your mind.");
+        mindfulnessActivity.Start();
+        mindfulnessActivity.End();
     }
 }
