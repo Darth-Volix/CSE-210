@@ -4,10 +4,10 @@ using System.Threading;
 public class BreathingActivity : MindfulnessActivity
 {
     // Constructor
-    public BreathingActivity(string _name, string _description) : base(_name, _description)
+    public BreathingActivity(string name, string description) : base(name, description)
     {
-        _name = "Breathing Activity";
-        _description = "This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing.";
+        _name = name;
+        _description = description;
     }
 
     // Methods
@@ -47,6 +47,7 @@ public class BreathingActivity : MindfulnessActivity
             Console.Write("1");
             Thread.Sleep(1000);
             Console.Write("\b \b");
+            Console.WriteLine("");
             counter = counter + 10;    
         }
     }
