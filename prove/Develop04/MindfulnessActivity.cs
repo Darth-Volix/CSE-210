@@ -1,6 +1,7 @@
 using System;
+using System.Threading;
 
-public class MindfulnessActvity
+public class MindfulnessActivity
 {
     // Properties
     protected string _name;
@@ -8,7 +9,7 @@ public class MindfulnessActvity
     protected int _duration;
 
     // Constructor
-    public MindfulnessActvity(string name, string description)
+    public MindfulnessActivity(string name, string description)
     {
         _name = name;
         _description = description;
