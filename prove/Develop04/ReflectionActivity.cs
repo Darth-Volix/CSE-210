@@ -45,21 +45,13 @@ public class ReflectionActivity : MindfulnessActivity
         Console.WriteLine("When you have something in mind, press enter to continue.");
         Console.ReadLine();
         Console.WriteLine("Now, ponder on each of the following questions as they related to this experience.");
-        Console.Write("You may begin in: 5");
-        Thread.Sleep(1000);
-        Console.Write("\b \b");
-        Console.Write("4");
-        Thread.Sleep(1000);
-        Console.Write("\b \b");
-        Console.Write("3");
-        Thread.Sleep(1000);
-        Console.Write("\b \b");
-        Console.Write("2");
-        Thread.Sleep(1000);
-        Console.Write("\b \b");
-        Console.Write("1");
-        Thread.Sleep(1000);
-        Console.Write("\b \b");
+        Console.Write("You may begin in: ");
+        for (int i = 5; i > 0; i--)
+        {
+            Console.Write(i);
+            Thread.Sleep(1000);
+            Console.Write("\b \b");
+        }
         Console.Clear();
         
         int counter = 0;

@@ -48,18 +48,13 @@ public class MindfulnessActivity
         int counter = 0;
         while (counter < seconds)
         {
-            Console.Write("-");
-            Thread.Sleep(250);
-            Console.Write("\b \b");
-            Console.Write("\\");
-            Thread.Sleep(250);
-            Console.Write("\b \b");
-            Console.Write("|");
-            Thread.Sleep(250);
-            Console.Write("\b \b");
-            Console.Write("/");
-            Thread.Sleep(250);
-            Console.Write("\b \b");
+            char[] spinner = new char[] { '-', '\\', '|', '/' };          
+            for (int i = 0; i < spinner.Length; i++)
+            {
+                Console.Write(spinner[i]);
+                Thread.Sleep(250);
+                Console.Write("\b \b");
+            }
             counter++;
         }
     }

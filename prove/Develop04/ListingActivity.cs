@@ -29,21 +29,13 @@ public class ListingActivity : MindfulnessActivity
 
         Console.WriteLine("List as many responses as you can to the following prompt: ");
         Console.WriteLine($" --- {_randomPrompt} --- ");
-        Console.Write("You may begin in: 5");
-        Thread.Sleep(1000);
-        Console.Write("\b \b");
-        Console.Write("4");
-        Thread.Sleep(1000);
-        Console.Write("\b \b");
-        Console.Write("3");
-        Thread.Sleep(1000);
-        Console.Write("\b \b");
-        Console.Write("2");
-        Thread.Sleep(1000);
-        Console.Write("\b \b");
-        Console.Write("1");
-        Thread.Sleep(1000);
-        Console.Write("\b \b");
+        Console.Write("You may begin in: ");
+        for (int i = 5; i > 0; i--)
+        {
+            Console.Write(i);
+            Thread.Sleep(1000);
+            Console.Write("\b \b");
+        }
         Console.WriteLine("");
 
         DateTime start = DateTime.Now;
