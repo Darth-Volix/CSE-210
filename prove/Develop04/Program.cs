@@ -1,5 +1,7 @@
 using System;
 
+// To exceed requirements for this assignment, I added code that keeps a log of how many times the user has done each activity.
+
 class Program
 {
     static void Main(string[] args)
