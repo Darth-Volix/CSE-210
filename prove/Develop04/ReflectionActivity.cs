@@ -62,9 +62,9 @@ public class ReflectionActivity : MindfulnessActivity
             string _randomQuestion = _questions[_questionIndex];
 
             Console.Write($"> {_randomQuestion} ");
-            PauseWithSpinner(15);
+            PauseWithSpinner(10);
             Console.WriteLine("");
-            counter = counter + 15;
+            counter = counter + 10;
         }
     }
 
