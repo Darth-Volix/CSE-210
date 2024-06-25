@@ -37,8 +37,8 @@ public class ChecklistGoal : Goal
 
     public override string Display()
     {
-        string status = base.Display();
-        return $"{status} Completed {_currentCount}/{_targetCount} times";
+        string nameAndStatus = base.Display();
+        return $"{nameAndStatus}: Completed {_currentCount}/{_targetCount} times";
     }
 
     public override string ToDataString()

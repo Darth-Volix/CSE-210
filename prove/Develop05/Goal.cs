@@ -23,7 +23,17 @@ public abstract class Goal
 
     public virtual string Display()
     {
-        string status = _completed ? "[X]" : "[ ]";
+        string status;
+        
+        if (_completed)
+        {
+            status = "[X]";
+        }
+        else
+        {
+            status = "[ ]";
+        }
+
         return $"{status} {_name}";
     }
 

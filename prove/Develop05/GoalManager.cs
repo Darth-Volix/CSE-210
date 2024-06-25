@@ -1,41 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 
 public class GoalManager
 {
     private List<Goal> _goals;
     private int _score;
+    private int _playerLevel;
+    private int _levelThreshold;
 
     public GoalManager()
     {
         _goals = new List<Goal>();
         _score = 0;
-    }
-
-    public void AddGoal(Goal goal)
-    {
-        _goals.Add(goal);
-    }
-
-    public void RecordEvent(string goalName)
-    {
-        foreach (var goal in _goals)
-        {
-            if (goal.GetName() == goalName)
-            {
-                _score += goal.RecordEvent();
-                break;
-            }
-        }
-    }
-
-    public void DisplayGoals()
-    {
-        foreach (var goal in _goals)
-        {
-            Console.WriteLine(goal.Display());
-        }
+        _playerLevel = 1;
+        _levelThreshold = 0;
     }
 
     public int GetScore()
@@ -43,15 +23,102 @@ public class GoalManager
         return _score;
     }
 
-    public void SaveGoals(string filename)
+    public int GetPlayerLevel()
     {
-        using (StreamWriter file = new StreamWriter(filename))
+        return _playerLevel;
+    }
+
+    public void SetLevelThreshold(int pointAmount)
+    {
+        _levelThreshold = pointAmount;
+    }
+
+    public void CheckLevelUp()
+    {
+        if (_score >= _levelThreshold)
         {
-            file.WriteLine(_score);
-            foreach (var goal in _goals)
+            while (_score >_levelThreshold)
             {
-                file.WriteLine(goal.ToDataString());
-            }
+                _playerLevel++;
+                _levelThreshold += _levelThreshold;
+            } 
+        }
+    }
+
+    public void AddGoal(Goal goal)
+    {
+        _goals.Add(goal);
+    }
+
+    public void AddNewGoal()
+    {
+        Console.WriteLine("");
+        Console.Write("Enter goal name: ");
+        string name = Console.ReadLine();
+        Console.Write("Enter goal points: ");
+        int points = int.Parse(Console.ReadLine());
+        Console.Write("Select goal type (1 - Simple, 2 - Eternal, 3 - Checklist): ");
+        int type = int.Parse(Console.ReadLine());
+
+        switch (type)
+        {
+            case 1:
+                AddGoal(new SimpleGoal(name, points));
+                break;
+            case 2:
+                Console.WriteLine("");
+                Console.Write("Warning, Eternal Goals cannot truly be marked complete.\nMarking complete will only award points.... ");
+                PauseWithSpinner(3);
+                Console.WriteLine("");
+                AddGoal(new EternalGoal(name, points));
+                break;
+            case 3:
+                Console.Write("Enter target count: ");
+                int targetCount = int.Parse(Console.ReadLine());
+                Console.Write("Enter bonus points: ");
+                int bonusPoints = int.Parse(Console.ReadLine());
+                AddGoal(new ChecklistGoal(name, points, targetCount, bonusPoints));
+                break;
+            default:
+                Console.WriteLine("Invalid goal type.");
+                break;
+        }
+    }
+
+    public void RecordEvent(string goalName)
+    {
+        if (_goals.Any(goal => goal.GetName() == goalName))
+        {
+            foreach (var goal in _goals)
+            {   
+                if (goal.GetName() == goalName)
+                {
+                    _score += goal.RecordEvent();
+
+                    if (goal is EternalGoal)
+                    {
+                        Console.WriteLine("");
+                        Console.WriteLine("Eternal goals cannot be marked complete.\nPoints awarded only.");
+                    }
+                    CheckLevelUp();
+                    break;
+                }
+            } 
+        }
+        else
+        {
+            Console.WriteLine("");
+            Console.WriteLine("Goal not found.");
+            Console.WriteLine("");
+        }
+    }
+
+    public void DisplayGoals()
+    {
+        Console.WriteLine("");
+        foreach (var goal in _goals)
+        {
+            Console.WriteLine(goal.Display());
         }
     }
 
@@ -92,44 +159,48 @@ public class GoalManager
                     goal.SetCompleted(completed);
                     AddGoal(goal);
                 }
+                CheckLevelUp();
             }
+        }
+        else
+        {
+            Console.WriteLine("");
+            Console.WriteLine("File not found.");
         }
     }
 
-    public void AddNewGoal()
+    public void SaveGoals(string filename)
     {
-        Console.WriteLine("Enter goal name:");
-        string name = Console.ReadLine();
-        Console.WriteLine("Enter goal points:");
-        int points = int.Parse(Console.ReadLine());
-        Console.WriteLine("Select goal type (1 - Simple, 2 - Eternal, 3 - Checklist):");
-        int type = int.Parse(Console.ReadLine());
-
-        switch (type)
+        using (StreamWriter file = new StreamWriter(filename))
         {
-            case 1:
-                AddGoal(new SimpleGoal(name, points));
-                break;
-            case 2:
-                AddGoal(new EternalGoal(name, points));
-                break;
-            case 3:
-                Console.WriteLine("Enter target count:");
-                int targetCount = int.Parse(Console.ReadLine());
-                Console.WriteLine("Enter bonus points:");
-                int bonusPoints = int.Parse(Console.ReadLine());
-                AddGoal(new ChecklistGoal(name, points, targetCount, bonusPoints));
-                break;
-            default:
-                Console.WriteLine("Invalid goal type.");
-                break;
+            file.WriteLine(_score);
+            foreach (var goal in _goals)
+            {
+                file.WriteLine(goal.ToDataString());
+            }
         }
     }
 
     public void MarkGoalComplete()
     {
-        Console.WriteLine("Enter goal name to mark complete:");
+        Console.Write("Enter goal name to mark complete: ");
         string goalName = Console.ReadLine();
         RecordEvent(goalName);
+    }
+
+    public void PauseWithSpinner(int seconds)
+    {
+        int counter = 0;
+        while (counter < seconds)
+        {
+            char[] spinner = new char[] { '-', '\\', '|', '/' };          
+            for (int i = 0; i < spinner.Length; i++)
+            {
+                Console.Write(spinner[i]);
+                Thread.Sleep(250);
+                Console.Write("\b \b");
+            }
+            counter++;
+        }
     }
 }

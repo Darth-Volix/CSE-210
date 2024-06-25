@@ -4,37 +4,91 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        GoalManager manager = new GoalManager();
-        manager.LoadGoals("goals.txt");
+        Console.WriteLine("");
+        Console.WriteLine("Welcome to the Goal Tracker!");
 
-        while (true)
+        GoalManager manager = new GoalManager();
+
+        Console.WriteLine("");
+        Console.Write("After how many points should the player level up?: ");
+        int levelThreshold = int.Parse(Console.ReadLine());
+        manager.SetLevelThreshold(levelThreshold);
+
+        bool running = true;
+
+        while (running)
         {
-            Console.WriteLine("1. Add new goal");
-            Console.WriteLine("2. Mark goal complete");
-            Console.WriteLine("3. Display goals");
-            Console.WriteLine("4. Display score");
-            Console.WriteLine("5. Save and exit");
+            Console.WriteLine("");
+            Console.WriteLine("Current score: " + manager.GetScore());
+            Console.WriteLine("Current level: " + manager.GetPlayerLevel());
+            Console.WriteLine("");
+            Console.WriteLine("What would you like to do?");
+            Console.WriteLine("     1. Load goals from file");
+            Console.WriteLine("     2. Add new goal");
+            Console.WriteLine("     3. Mark goal complete");
+            Console.WriteLine("     4. Display goals");
+            Console.WriteLine("     5. Save and exit");
+            Console.Write("Enter your choice: ");
 
             int choice = int.Parse(Console.ReadLine());
+            
             switch (choice)
             {
                 case 1:
-                    manager.AddNewGoal();
+                    Console.WriteLine("");
+                    Console.Write("Enter the name of the file: ");
+                    string filename = Console.ReadLine();
+                    manager.PauseWithSpinner(3);
+                    manager.LoadGoals(filename);
+                    Console.WriteLine("");
+                    Console.WriteLine("Goals loaded!");
+                    Console.Write("Returning to main menu... ");
+                    manager.PauseWithSpinner(3);
+                    Console.Clear();
                     break;
                 case 2:
-                    manager.MarkGoalComplete();
+                    Console.Clear();
+                    manager.AddNewGoal();
+                    Console.WriteLine("");
+                    Console.Write("Adding goal... ");
+                    manager.PauseWithSpinner(3);
+                    Console.WriteLine("");
+                    Console.WriteLine("Goal added!");
+                    Console.Write("Returning to main menu... ");
+                    manager.PauseWithSpinner(3);
+                    Console.Clear();
                     break;
                 case 3:
-                    manager.DisplayGoals();
+                    Console.Clear();
+                    manager.MarkGoalComplete();
+                    Console.WriteLine("");
+                    Console.Write("Marking goal complete... ");
+                    manager.PauseWithSpinner(3);
+                    Console.WriteLine("");
+                    Console.WriteLine("Goal marked complete!");
+                    Console.Write("Returning to main menu... ");
+                    manager.PauseWithSpinner(3);
+                    Console.Clear();
                     break;
                 case 4:
-                    Console.WriteLine($"Total Score: {manager.GetScore()}");
+                    manager.DisplayGoals();
                     break;
                 case 5:
-                    manager.SaveGoals("goals.txt");
-                    return;
+                    Console.WriteLine("");
+                    Console.WriteLine("Enter the name of the file to save to: ");
+                    string saveFilename = Console.ReadLine();
+                    manager.SaveGoals(saveFilename);
+                    Console.Write("Saving goals... ");
+                    manager.PauseWithSpinner(3);
+                    Console.WriteLine("");
+                    Console.WriteLine("Goals saved. Goodbye!");
+                    Console.WriteLine("");
+                    running = false;
+                    break;
                 default:
+                    Console.WriteLine("");
                     Console.WriteLine("Invalid choice.");
+                    Console.WriteLine("");
                     break;
             }
         }
