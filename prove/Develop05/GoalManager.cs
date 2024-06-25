@@ -57,6 +57,14 @@ public class GoalManager
         Console.WriteLine("");
         Console.Write("Enter goal name: ");
         string name = Console.ReadLine();
+
+        if (_goals.Exists(goal => goal.GetName() == name))
+        {
+            Console.WriteLine("");
+            Console.WriteLine("Goal already exists.");
+            return;
+        }
+
         Console.Write("Enter goal points: ");
         int points = int.Parse(Console.ReadLine());
         Console.Write("Select goal type (1 - Simple, 2 - Eternal, 3 - Checklist): ");
@@ -85,6 +93,12 @@ public class GoalManager
                 Console.WriteLine("Invalid goal type.");
                 break;
         }
+        
+        Console.WriteLine("");
+        Console.Write("Adding goal... ");
+        PauseWithSpinner(3);
+        Console.WriteLine("");
+        Console.WriteLine("Goal added!");
     }
 
     public bool RecordEvent(string goalName)

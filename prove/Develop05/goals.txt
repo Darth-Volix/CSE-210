@@ -1,2 +1,0 @@
-500
-SimpleGoal,Nickleford,500,True

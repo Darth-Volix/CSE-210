@@ -40,19 +40,14 @@ public class Program
                     string filename = Console.ReadLine();
                     manager.PauseWithSpinner(3);
                     manager.LoadGoals(filename);
-                    Console.WriteLine("");
                     Console.Write("Returning to main menu... ");
-                    manager.PauseWithSpinner(3);
+                    manager.PauseWithSpinner(5);
                     Console.Clear();
                     break;
                 case 2:
                     Console.Clear();
                     manager.AddNewGoal();
                     Console.WriteLine("");
-                    Console.Write("Adding goal... ");
-                    manager.PauseWithSpinner(3);
-                    Console.WriteLine("");
-                    Console.WriteLine("Goal added!");
                     Console.Write("Returning to main menu... ");
                     manager.PauseWithSpinner(3);
                     Console.Clear();
