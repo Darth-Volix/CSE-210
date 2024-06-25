@@ -19,8 +19,8 @@ public class Program
         while (running)
         {
             Console.WriteLine("");
-            Console.WriteLine("Current score: " + manager.GetScore());
             Console.WriteLine("Current level: " + manager.GetPlayerLevel());
+            Console.WriteLine("Current score: " + manager.GetScore());
             Console.WriteLine("");
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("     1. Load goals from file");
@@ -35,13 +35,12 @@ public class Program
             switch (choice)
             {
                 case 1:
-                    Console.WriteLine("");
+                    Console.Clear();
                     Console.Write("Enter the name of the file: ");
                     string filename = Console.ReadLine();
                     manager.PauseWithSpinner(3);
                     manager.LoadGoals(filename);
                     Console.WriteLine("");
-                    Console.WriteLine("Goals loaded!");
                     Console.Write("Returning to main menu... ");
                     manager.PauseWithSpinner(3);
                     Console.Clear();
@@ -61,23 +60,21 @@ public class Program
                 case 3:
                     Console.Clear();
                     manager.MarkGoalComplete();
-                    Console.WriteLine("");
-                    Console.Write("Marking goal complete... ");
-                    manager.PauseWithSpinner(3);
-                    Console.WriteLine("");
-                    Console.WriteLine("Goal marked complete!");
                     Console.Write("Returning to main menu... ");
                     manager.PauseWithSpinner(3);
                     Console.Clear();
                     break;
                 case 4:
+                    Console.WriteLine("");
+                    Console.WriteLine("Your goals:");
                     manager.DisplayGoals();
                     break;
                 case 5:
                     Console.WriteLine("");
-                    Console.WriteLine("Enter the name of the file to save to: ");
+                    Console.Write("Enter the name of the file to save to: ");
                     string saveFilename = Console.ReadLine();
                     manager.SaveGoals(saveFilename);
+                    Console.WriteLine("");
                     Console.Write("Saving goals... ");
                     manager.PauseWithSpinner(3);
                     Console.WriteLine("");

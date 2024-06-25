@@ -35,13 +35,15 @@ public class GoalManager
 
     public void CheckLevelUp()
     {
-        if (_score >= _levelThreshold)
+        int calculateLevel = _score / _levelThreshold;
+
+        if (calculateLevel > _playerLevel)
         {
-            while (_score >_levelThreshold)
-            {
-                _playerLevel++;
-                _levelThreshold += _levelThreshold;
-            } 
+            _playerLevel = calculateLevel;
+            Console.WriteLine("");
+            Console.WriteLine("Congratulations! You have leveled up!");
+            Console.WriteLine("You are now level " + _playerLevel);
+            Console.WriteLine("");
         }
     }
 
@@ -85,7 +87,7 @@ public class GoalManager
         }
     }
 
-    public void RecordEvent(string goalName)
+    public bool RecordEvent(string goalName)
     {
         if (_goals.Any(goal => goal.GetName() == goalName))
         {
@@ -93,6 +95,13 @@ public class GoalManager
             {   
                 if (goal.GetName() == goalName)
                 {
+                    if (goal.IsCompleted())
+                    {
+                        Console.WriteLine("");
+                        Console.WriteLine("Goal already marked complete.");
+                        return false;
+                    }
+
                     _score += goal.RecordEvent();
 
                     if (goal is EternalGoal)
@@ -100,16 +109,17 @@ public class GoalManager
                         Console.WriteLine("");
                         Console.WriteLine("Eternal goals cannot be marked complete.\nPoints awarded only.");
                     }
-                    CheckLevelUp();
                     break;
                 }
             } 
+            return true;
         }
         else
         {
             Console.WriteLine("");
             Console.WriteLine("Goal not found.");
             Console.WriteLine("");
+            return false;
         }
     }
 
@@ -159,6 +169,7 @@ public class GoalManager
                     goal.SetCompleted(completed);
                     AddGoal(goal);
                 }
+                Console.WriteLine("Goals loaded successfully.");
                 CheckLevelUp();
             }
         }
@@ -185,7 +196,17 @@ public class GoalManager
     {
         Console.Write("Enter goal name to mark complete: ");
         string goalName = Console.ReadLine();
-        RecordEvent(goalName);
+        bool completedGoal = RecordEvent(goalName);
+
+        if (completedGoal)
+        {
+            Console.WriteLine("");
+            Console.Write("Marking goal complete... ");
+            PauseWithSpinner(3);
+            Console.WriteLine("");
+            Console.WriteLine("Goal marked complete!");
+            CheckLevelUp();
+        }
     }
 
     public void PauseWithSpinner(int seconds)

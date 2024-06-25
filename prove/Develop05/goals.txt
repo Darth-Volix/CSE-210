@@ -1,2 +1,2 @@
-0
-SimpleGoal,Hello,34,False
+500
+SimpleGoal,Nickleford,500,True
