@@ -1,0 +1,4 @@
+560
+ChecklistGoal,Sweeping,10,False,5,500,1
+SimpleGoal,Take Out trash,50,True
+EternalGoal,Temple Visit,500,False

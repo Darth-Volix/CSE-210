@@ -90,8 +90,9 @@ public class GoalManager
                 AddGoal(new ChecklistGoal(name, points, targetCount, bonusPoints));
                 break;
             default:
+                Console.WriteLine("");
                 Console.WriteLine("Invalid goal type.");
-                break;
+                return;
         }
         
         Console.WriteLine("");
