@@ -123,6 +123,8 @@ public class GoalManager
                     {
                         Console.WriteLine("");
                         Console.WriteLine("Eternal goals cannot be marked complete.\nPoints awarded only.");
+                        Console.WriteLine("");
+                        return false;
                     }
                     break;
                 }

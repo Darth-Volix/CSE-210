@@ -60,7 +60,7 @@ public class Program
                     Console.Clear();
                     break;
                 case 4:
-                    Console.WriteLine("");
+                    Console.Clear();
                     Console.WriteLine("Your goals:");
                     manager.DisplayGoals();
                     break;
