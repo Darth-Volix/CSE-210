@@ -16,7 +16,7 @@ public abstract class LoanAccount
     protected List<Transaction> _transactions;
 
     // Methods
-    public abstract void OpenAccount();
+    public abstract LoanAccount OpenAccount();
     
     public static void CloseAccount()
     {
@@ -49,10 +49,10 @@ public abstract class LoanAccount
         return dailyInterestRate;
     }
 
-    public static void MakePayment(decimal _paymentAmount)
+    public static void MakePayment()
     {
-        _balance -= _paymentAmount;
-        _transactions.Add(new Transaction(_paymentAmount, "Payment", DateTime.Now));
-        Console.WriteLine($"\nPayment of {_paymentAmount} made on {DateTime.Now}");
+        _balance -= _monthlyPayment;
+        _transactions.Add(new Transaction(_monthlyPayment, "Payment", DateTime.Now));
+        Console.WriteLine($"\nPayment of {_monthlyPayment} made on {DateTime.Now}");
     }
 }
