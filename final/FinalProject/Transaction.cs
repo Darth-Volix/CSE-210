@@ -20,7 +20,7 @@ public class Transaction
     {
         Console.WriteLine("---------------------------------");
         Console.WriteLine($"Transaction Date: {_date}");
-        Console.WriteLine($"Transaction Amount: {_amount}");
+        Console.WriteLine($"Transaction Amount: ${_amount}");
         Console.WriteLine($"Transaction Type: {_transactionType}");
         Console.WriteLine("---------------------------------");
     }

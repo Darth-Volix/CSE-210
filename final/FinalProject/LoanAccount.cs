@@ -51,8 +51,24 @@ public abstract class LoanAccount
 
     public static void MakePayment()
     {
-        _balance -= _monthlyPayment;
-        _transactions.Add(new Transaction(_monthlyPayment, "Payment", DateTime.Now));
-        Console.WriteLine($"\nPayment of {_monthlyPayment} made on {DateTime.Now}");
+        DateTime currentDate = DateTime.Now;
+        int currentDay = currentDate.Day;
+
+        if (currentDay == _dueDate)
+        {
+            _balance -= _monthlyPayment;
+            _transactions.Add(new Transaction(_monthlyPayment, "Payment", DateTime.Now));
+            Console.WriteLine($"\nPayment of ${_monthlyPayment} made on {DateTime.Now}");
+
+            if (_balance == 0)
+            {
+                Console.WriteLine("\nLoan paid in full.");
+                this.CloseAccount();
+            }
+        }
+        else
+        {
+            Console.WriteLine("\nPayment not made. Today is not the due date.");
+        }
     }
 }
