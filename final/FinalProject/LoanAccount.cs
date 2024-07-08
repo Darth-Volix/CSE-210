@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public abstract class LoanAccount 
 {
     // Attributes
+    protected string _loanName;
     protected bool _isClosed;
     protected int _term;
     protected decimal _interestRate;
@@ -12,13 +13,58 @@ public abstract class LoanAccount
     protected decimal _balance;
     protected int _dueDate;
     protected DateTime _openDate;
-    protected DateTime _closeDate;
+    protected DateTime? _closeDate;
     protected List<Transaction> _transactions;
 
     // Methods
-    public abstract LoanAccount OpenAccount();
+    public static LoanAccount OpenAccount();
+    {
+        while (accountType != "1" || accountType != "2")
+        {
+            Console.WriteLine("\nSelect the type of loan account you would like to open:");
+            Console.WriteLine("     1. Auto Loan");
+            Console.WriteLine("     2. Personal Loan");
+            Console.Write("Enter your selection: ");
+            accountType = Console.ReadLine();
+
+            switch (accountType)
+            {
+                case "1":
+                    Console.Write("Enter the make of the vehicle: ");
+                    _make = Console.ReadLine();
+                    Console.Write("Enter the model of the vehicle: ");
+                    _model = Console.ReadLine();
+                    Console.Write("Enter the year of the vehicle: ");
+                    _year = Convert.ToInt32(Console.ReadLine());
+                    Console.Write("Enter the title type (Clean, Salvaged, RB/RS, etc): ");
+                    _titleType = Console.ReadLine();
+                    _loanName = $"{_year} {_make} {_model}";
+                    Console.Write("Enter the loan amount: $");
+                    _loanAmount = Convert.ToDecimal(Console.ReadLine());
+                    Console.Write("Enter the interest rate in format 0.XX (18% = 0.18): ");
+                    _interestRate = Convert.ToDecimal(Console.ReadLine());
+                    Console.Write("Enter the term in years: ");
+                    _term = Convert.ToInt32(Console.ReadLine());
+                    Console.Write("Enter the due date (1-28): ");
+                    _dueDate = Convert.ToInt32(Console.ReadLine());
+                    _openDate = DateTime.Now;
+                    _closeDate = null;
+                    _isClosed = false;
+                    _balance = _loanAmount;
+                    _transactions = new List<Transaction>();
+                    _monthlyPayment = CalculateMonthlyPayment();
+                    
+                    AutoLoan autoLoan = new AutoLoan(_make, _model, _year, _titleType, _loanName, _isClosed, _term, _interestRate, _loanAmount, _monthlyPayment, _balance, _dueDate, _openDate, _closeDate, _transactions);
+                    
+                    return autoLoan;
+                    break;
+                
+                default:
+            }
+        }
+    }
     
-    public static void CloseAccount()
+    public virtual void CloseAccount()
     {
         _isClosed = true;
         _closeDate = DateTime.Now;

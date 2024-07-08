@@ -8,7 +8,7 @@ public class DepositAccount
     protected decimal _interestRate;
     protected decimal _balance;
     protected DateTime _openDate;
-    protected DateTime _closeDate;
+    protected DateTime? _closeDate;
     protected List<Transaction> _transactions;
 
     // Methods
