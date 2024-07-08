@@ -24,12 +24,35 @@ public abstract class LoanAccount
         _closeDate = DateTime.Now;
     }
 
-    public static decimal CalculateMonthlyPayment(_term, _loanAmount, _interestRate)
+    public static decimal CalculateMonthlyPayment()
     {
         int numberOfPayments = _term * 12;
         decimal monthlyInterestRate = _interestRate / 12;
         decimal monthlyPayment = (_loanAmount * monthlyInterestRate * Math.Pow(1 + monthlyInterestRate, numberOfPayments)) / (Math.Pow(1 + monthlyInterestRate, numberOfPayments) - 1);
 
         return monthlyPayment;
+    }
+
+    public static decimal TenDayPayoff()
+    {
+        decimal dailyInterestRate = CalculateDailyInterestRate(_interestRate);
+        decimal tenDayInterest = _balance * dailyInterestRate * 10;
+        decimal tenDayPayoff = _balance + tenDayInterest;
+
+        return tenDayPayoff;
+    }
+
+    public static decimal CalculateDailyInterestRate()
+    {
+        decimal dailyInterestRate = _interestRate / 365;
+       
+        return dailyInterestRate;
+    }
+
+    public static void MakePayment(decimal _paymentAmount)
+    {
+        _balance -= _paymentAmount;
+        _transactions.Add(new Transaction(_paymentAmount, "Payment", DateTime.Now));
+        Console.WriteLine($"\nPayment of {_paymentAmount} made on {DateTime.Now}");
     }
 }
