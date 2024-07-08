@@ -18,11 +18,18 @@ public abstract class LoanAccount
     // Methods
     public abstract void OpenAccount();
     
-    public void CloseAccount()
+    public static void CloseAccount()
     {
         _isClosed = true;
         _closeDate = DateTime.Now;
     }
 
-    
+    public static decimal CalculateMonthlyPayment(_term, _loanAmount, _interestRate)
+    {
+        int numberOfPayments = _term * 12;
+        decimal monthlyInterestRate = _interestRate / 12;
+        decimal monthlyPayment = (_loanAmount * monthlyInterestRate * Math.Pow(1 + monthlyInterestRate, numberOfPayments)) / (Math.Pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+
+        return monthlyPayment;
+    }
 }
