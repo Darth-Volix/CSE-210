@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-public class DepositAccount
+public abstract class DepositAccount
 {
     // Attributes
     protected bool _isClosed;
@@ -14,7 +14,7 @@ public class DepositAccount
     // Methods
     public abstract DepositAccount OpenAccount();
 
-    public static void CloseAccount()
+    public void CloseAccount()
     {
         _isClosed = true;
         _closeDate = DateTime.Now;
@@ -48,14 +48,14 @@ public class DepositAccount
 
     }
 
-    public static decimal CalculateMonthlyInterestRate()
+    public decimal CalculateMonthlyInterestRate()
     {
         decimal monthlyInterestRate = _interestRate / 12;
 
         return monthlyInterestRate;
     }
 
-    public static void AddInterest()
+    public void AddInterest()
     {
         DateTime currentDate = DateTime.Now;
         int currentDay = currentDate.Day;

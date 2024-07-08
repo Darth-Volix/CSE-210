@@ -11,7 +11,7 @@ public class AutoLoan : LoanAccount
     private string _address;
 
     // Constructor
-    public AutoLoan(string make, string model, int year, string titleType) : base(string loanName, bool isClosed, int term, decimal interestRate, decimal loanAmount, decimal monthlyPayment, decimal balance, int dueDate, DateTime openDate, DateTime? closeDate, List<Transaction> transactions)
+    public AutoLoan(string make, string model, int year, string titleType, string loanName, bool isClosed, int term, decimal interestRate, decimal loanAmount, decimal monthlyPayment, decimal balance, int dueDate, DateTime openDate, DateTime? closeDate, List<Transaction> transactions) : base(loanName, isClosed, term, interestRate, loanAmount, monthlyPayment, balance, dueDate, openDate, closeDate, transactions)
     {
         _make = make;
         _model = model;
@@ -28,11 +28,11 @@ public class AutoLoan : LoanAccount
         _openDate = openDate;
         _closeDate = closeDate;
         _transactions = transactions;
-        _address = null
+        _address = null;
     }
 
     // Methods
-    public override void closeAccount()
+    public override void CloseAccount()
     {
         _isClosed = true;
         _closeDate = DateTime.Now;

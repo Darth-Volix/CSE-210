@@ -16,10 +16,28 @@ public abstract class LoanAccount
     protected DateTime? _closeDate;
     protected List<Transaction> _transactions;
 
-    // Methods
-    public static LoanAccount OpenAccount();
+    // Constructor
+    public LoanAccount(string loanName, bool isClosed, int term, decimal interestRate, decimal loanAmount, decimal monthlyPayment, decimal balance, int dueDate, DateTime openDate, DateTime? closeDate, List<Transaction> transactions)
     {
-        while (accountType != "1" || accountType != "2")
+        _loanName = loanName;
+        _isClosed = isClosed;
+        _term = term;
+        _interestRate = interestRate;
+        _loanAmount = loanAmount;
+        _monthlyPayment = monthlyPayment;
+        _balance = balance;
+        _dueDate = dueDate;
+        _openDate = openDate;
+        _closeDate = closeDate;
+        _transactions = transactions;
+    }
+
+    // Methods
+    public static LoanAccount OpenAccount()
+    {
+        string accountType = "";
+        
+        while (accountType != "1" && accountType != "2")
         {
             Console.WriteLine("\nSelect the type of loan account you would like to open:");
             Console.WriteLine("     1. Auto Loan");
@@ -27,43 +45,48 @@ public abstract class LoanAccount
             Console.Write("Enter your selection: ");
             accountType = Console.ReadLine();
 
-            switch (accountType)
+            if (accountType != "1" && accountType != "2")
             {
-                case "1":
-                    Console.Write("Enter the make of the vehicle: ");
-                    _make = Console.ReadLine();
-                    Console.Write("Enter the model of the vehicle: ");
-                    _model = Console.ReadLine();
-                    Console.Write("Enter the year of the vehicle: ");
-                    _year = Convert.ToInt32(Console.ReadLine());
-                    Console.Write("Enter the title type (Clean, Salvaged, RB/RS, etc): ");
-                    _titleType = Console.ReadLine();
-                    _loanName = $"{_year} {_make} {_model}";
-                    Console.Write("Enter the loan amount: $");
-                    _loanAmount = Convert.ToDecimal(Console.ReadLine());
-                    Console.Write("Enter the interest rate in format 0.XX (18% = 0.18): ");
-                    _interestRate = Convert.ToDecimal(Console.ReadLine());
-                    Console.Write("Enter the term in years: ");
-                    _term = Convert.ToInt32(Console.ReadLine());
-                    Console.Write("Enter the due date (1-28): ");
-                    _dueDate = Convert.ToInt32(Console.ReadLine());
-                    _openDate = DateTime.Now;
-                    _closeDate = null;
-                    _isClosed = false;
-                    _balance = _loanAmount;
-                    _transactions = new List<Transaction>();
-                    _monthlyPayment = CalculateMonthlyPayment(int term, decimal interestRate, decimal loanAmount);
-                    
-                    AutoLoan autoLoan = new AutoLoan(_make, _model, _year, _titleType, _loanName, _isClosed, _term, _interestRate, _loanAmount, _monthlyPayment, _balance, _dueDate, _openDate, _closeDate, _transactions);
-                    
-                    return autoLoan;
-                    break;
-                case "2":
-                    _loanName = "Personal Loan";
-
-                
-                default:
+                Console.WriteLine("\nInvalid selection. Please try again.");
             }
+        }
+        switch (accountType)
+        {
+            case "1":
+                Console.Write("Enter the make of the vehicle: ");
+                string _make = Console.ReadLine();
+                Console.Write("Enter the model of the vehicle: ");
+                string _model = Console.ReadLine();
+                Console.Write("Enter the year of the vehicle: ");
+                int _year = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Enter the title type (Clean, Salvaged, RB/RS, etc): ");
+                string _titleType = Console.ReadLine();
+                string _loanName = $"{_year} {_make} {_model}";
+                Console.Write("Enter the loan amount: $");
+                decimal _loanAmount = Convert.ToDecimal(Console.ReadLine());
+                Console.Write("Enter the interest rate in format 0.XX (18% = 0.18): ");
+                decimal _interestRate = Convert.ToDecimal(Console.ReadLine());
+                Console.Write("Enter the term in years: ");
+                int _term = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Enter the due date (1-28): ");
+                int _dueDate = Convert.ToInt32(Console.ReadLine());
+                DateTime _openDate = DateTime.Now;
+                DateTime? _closeDate = null;
+                bool _isClosed = false;
+                decimal _balance = _loanAmount;
+                List<Transaction> _transactions = new List<Transaction>();
+                decimal _monthlyPayment = CalculateMonthlyPayment(_term, _interestRate, _loanAmount);
+                
+                AutoLoan autoLoan = new AutoLoan(_make, _model, _year, _titleType, _loanName, _isClosed, _term, _interestRate, _loanAmount, _monthlyPayment, _balance, _dueDate, _openDate, _closeDate, _transactions);
+                
+                return autoLoan;
+            case "2":
+                _loanName = "Personal Loan";
+                // Add code for personal loan here
+                break;
+            default:
+                // Add code for default case here
+                break;
         }
     }
     
@@ -75,18 +98,18 @@ public abstract class LoanAccount
         Console.WriteLine($"\n{_loanName} has been closed.");
     }
 
-    public static decimal CalculateMonthlyPayment(int term, decimal interestRate, decimal loanAmount)
+    public static decimal CalculateMonthlyPayment(int _term, decimal _interestRate, decimal _loanAmount)
     {
         int numberOfPayments = _term * 12;
         decimal monthlyInterestRate = _interestRate / 12;
-        decimal monthlyPayment = (_loanAmount * monthlyInterestRate * Math.Pow(1 + monthlyInterestRate, numberOfPayments)) / (Math.Pow(1 + monthlyInterestRate, numberOfPayments) - 1);
-
-        return monthlyPayment;
+        double monthlyPayment = ((double)_loanAmount * (double)monthlyInterestRate * Math.Pow(1 + (double)monthlyInterestRate, numberOfPayments)) / (Math.Pow(1 + (double)monthlyInterestRate, numberOfPayments) - 1);
+    
+        return (decimal)monthlyPayment;
     }
 
     public decimal TenDayPayoff()
     {
-        decimal dailyInterestRate = CalculateDailyInterestRate(_interestRate);
+        decimal dailyInterestRate = CalculateDailyInterestRate();
         decimal tenDayInterest = _balance * dailyInterestRate * 10;
         decimal tenDayPayoff = _balance + tenDayInterest;
 
@@ -131,5 +154,5 @@ public abstract class LoanAccount
         }
     }
 
-    public abstract void DisplayAccountInfo()
+    public abstract void DisplayAccountInfo();
 }
