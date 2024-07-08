@@ -52,12 +52,15 @@ public abstract class LoanAccount
                     _isClosed = false;
                     _balance = _loanAmount;
                     _transactions = new List<Transaction>();
-                    _monthlyPayment = CalculateMonthlyPayment();
+                    _monthlyPayment = CalculateMonthlyPayment(int term, decimal interestRate, decimal loanAmount);
                     
                     AutoLoan autoLoan = new AutoLoan(_make, _model, _year, _titleType, _loanName, _isClosed, _term, _interestRate, _loanAmount, _monthlyPayment, _balance, _dueDate, _openDate, _closeDate, _transactions);
                     
                     return autoLoan;
                     break;
+                case "2":
+                    _loanName = "Personal Loan";
+
                 
                 default:
             }
@@ -68,9 +71,11 @@ public abstract class LoanAccount
     {
         _isClosed = true;
         _closeDate = DateTime.Now;
+
+        Console.WriteLine($"\n{_loanName} has been closed.");
     }
 
-    public static decimal CalculateMonthlyPayment()
+    public static decimal CalculateMonthlyPayment(int term, decimal interestRate, decimal loanAmount)
     {
         int numberOfPayments = _term * 12;
         decimal monthlyInterestRate = _interestRate / 12;
@@ -79,7 +84,7 @@ public abstract class LoanAccount
         return monthlyPayment;
     }
 
-    public static decimal TenDayPayoff()
+    public decimal TenDayPayoff()
     {
         decimal dailyInterestRate = CalculateDailyInterestRate(_interestRate);
         decimal tenDayInterest = _balance * dailyInterestRate * 10;
@@ -88,14 +93,14 @@ public abstract class LoanAccount
         return tenDayPayoff;
     }
 
-    public static decimal CalculateDailyInterestRate()
+    public decimal CalculateDailyInterestRate()
     {
         decimal dailyInterestRate = _interestRate / 365;
        
         return dailyInterestRate;
     }
 
-    public static void MakePayment()
+    public void MakePayment()
     {
         DateTime currentDate = DateTime.Now;
         int currentDay = currentDate.Day;
@@ -117,4 +122,14 @@ public abstract class LoanAccount
             Console.WriteLine("\nPayment not made. Today is not the due date.");
         }
     }
+
+    public void DisplayTransactions()
+    {
+        foreach (Transaction transaction in _transactions)
+        {
+            transaction.DisplayTransaction();
+        }
+    }
+
+    public abstract void DisplayAccountInfo()
 }
