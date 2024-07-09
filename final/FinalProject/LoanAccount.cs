@@ -42,7 +42,7 @@ public abstract class LoanAccount
             Console.WriteLine("\nSelect the type of loan account you would like to open:");
             Console.WriteLine("     1. Auto Loan");
             Console.WriteLine("     2. Personal Loan");
-            Console.Write("Enter your selection: ");
+            Console.Write("Enter your selection (1 or 2): ");
             accountType = Console.ReadLine();
 
             if (accountType != "1" && accountType != "2")
@@ -50,44 +50,64 @@ public abstract class LoanAccount
                 Console.WriteLine("\nInvalid selection. Please try again.");
             }
         }
-        switch (accountType)
+        
+        if (accountType == "1")
         {
-            case "1":
-                Console.Write("Enter the make of the vehicle: ");
-                string _make = Console.ReadLine();
-                Console.Write("Enter the model of the vehicle: ");
-                string _model = Console.ReadLine();
-                Console.Write("Enter the year of the vehicle: ");
-                int _year = Convert.ToInt32(Console.ReadLine());
-                Console.Write("Enter the title type (Clean, Salvaged, RB/RS, etc): ");
-                string _titleType = Console.ReadLine();
-                string _loanName = $"{_year} {_make} {_model}";
-                Console.Write("Enter the loan amount: $");
-                decimal _loanAmount = Convert.ToDecimal(Console.ReadLine());
-                Console.Write("Enter the interest rate in format 0.XX (18% = 0.18): ");
-                decimal _interestRate = Convert.ToDecimal(Console.ReadLine());
-                Console.Write("Enter the term in years: ");
-                int _term = Convert.ToInt32(Console.ReadLine());
-                Console.Write("Enter the due date (1-28): ");
-                int _dueDate = Convert.ToInt32(Console.ReadLine());
-                DateTime _openDate = DateTime.Now;
-                DateTime? _closeDate = null;
-                bool _isClosed = false;
-                decimal _balance = _loanAmount;
-                List<Transaction> _transactions = new List<Transaction>();
-                decimal _monthlyPayment = CalculateMonthlyPayment(_term, _interestRate, _loanAmount);
-                
-                AutoLoan autoLoan = new AutoLoan(_make, _model, _year, _titleType, _loanName, _isClosed, _term, _interestRate, _loanAmount, _monthlyPayment, _balance, _dueDate, _openDate, _closeDate, _transactions);
-                
-                return autoLoan;
-            case "2":
-                _loanName = "Personal Loan";
-                // Add code for personal loan here
-                break;
-            default:
-                // Add code for default case here
-                break;
+            Console.Write("Enter the make of the vehicle: ");
+            string _make = Console.ReadLine();
+            Console.Write("Enter the model of the vehicle: ");
+            string _model = Console.ReadLine();
+            Console.Write("Enter the year of the vehicle: ");
+            int _year = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter the title type (Clean, Salvaged, RB/RS, etc): ");
+            string _titleType = Console.ReadLine();
+            string _loanName = $"{_year} {_make} {_model}";
+            Console.Write("Enter the loan amount: $");
+            decimal _loanAmount = Convert.ToDecimal(Console.ReadLine());
+            Console.Write("Enter the interest rate in format 0.XX (18% = 0.18): ");
+            decimal _interestRate = Convert.ToDecimal(Console.ReadLine());
+            Console.Write("Enter the term in years: ");
+            int _term = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter the due date (1-28): ");
+            int _dueDate = Convert.ToInt32(Console.ReadLine());
+            DateTime _openDate = DateTime.Now;
+            DateTime? _closeDate = null;
+            bool _isClosed = false;
+            decimal _balance = _loanAmount;
+            List<Transaction> _transactions = new List<Transaction>();
+            decimal _monthlyPayment = CalculateMonthlyPayment(_term, _interestRate, _loanAmount);
+            
+            AutoLoan autoLoan = new AutoLoan(_make, _model, _year, _titleType, _loanName, _isClosed, _term, _interestRate, _loanAmount, _monthlyPayment, _balance, _dueDate, _openDate, _closeDate, _transactions);
+            
+            return autoLoan;
         }
+        else if (accountType == "2")
+        {
+            Console.Write("Enter the purpose of the loan: ");
+            string _loanPurpose = Console.ReadLine();
+            Console.Write("Enter the loan name: ");
+            string _loanName = Console.ReadLine();
+            Console.Write("Enter the loan amount: $");
+            decimal _loanAmount = Convert.ToDecimal(Console.ReadLine());
+            Console.Write("Enter the interest rate in format 0.XX (18% = 0.18): ");
+            decimal _interestRate = Convert.ToDecimal(Console.ReadLine());
+            Console.Write("Enter the term in years: ");
+            int _term = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter the due date (1-28): ");
+            int _dueDate = Convert.ToInt32(Console.ReadLine());
+            DateTime _openDate = DateTime.Now;
+            DateTime? _closeDate = null;
+            bool _isClosed = false;
+            decimal _balance = _loanAmount;
+            List<Transaction> _transactions = new List<Transaction>();
+            decimal _monthlyPayment = CalculateMonthlyPayment(_term, _interestRate, _loanAmount);
+            
+            PersonalLoan personalLoan = new PersonalLoan(_loanPurpose, _loanName, _isClosed, _term, _interestRate, _loanAmount, _monthlyPayment, _balance, _dueDate, _openDate, _closeDate, _transactions);
+            
+            return personalLoan;
+        }
+        // This return statement is unreachable, but it is necessary to avoid a compilation error.
+        return null;
     }
     
     public virtual void CloseAccount()
