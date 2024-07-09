@@ -4,17 +4,70 @@ using System.Collections.Generic;
 public abstract class DepositAccount
 {
     // Attributes
+    protected string _accountName;
     protected bool _isClosed;
-    protected decimal _interestRate;
+    protected double _interestRate;
     protected decimal _balance;
     protected DateTime _openDate;
     protected DateTime? _closeDate;
     protected List<Transaction> _transactions;
 
-    // Methods
-    public abstract DepositAccount OpenAccount();
+    // Constructor
+    public DepositAccount(string accountName, bool isClosed, double interestRate, decimal balance, DateTime openDate, DateTime? closeDate, List<Transaction> transactions)
+    {
+        _accountName = accountName;
+        _isClosed = isClosed;
+        _interestRate = interestRate;
+        _balance = balance;
+        _openDate = openDate;
+        _closeDate = closeDate;
+        _transactions = transactions;
+    }
 
-    public void CloseAccount()
+    // Methods
+    public static DepositAccount OpenAccount()
+    {
+        string accountType = "";
+
+        while (accountType != "1" && accountType != "2")
+        {
+            Console.WriteLine("\nSelect the type of deposit account you would like to open:");
+            Console.WriteLine("     1. Savings Account");
+            Console.WriteLine("     2. MoneyMarket Account");
+            Console.Write("Enter your selection (1 or 2): ");
+            accountType = Console.ReadLine();
+
+            if (accountType != "1" && accountType != "2")
+            {
+                Console.WriteLine("\nInvalid selection. Please try again.");
+            }
+        }
+
+        if (accountType == "1")
+        {
+            Console.Write("\nEnter the amount of your opening deposit: $");
+            decimal balance = Convert.ToDecimal(Console.ReadLine());
+            string accountName = "Savings Account";
+            double interestRate = 0.05;
+            DateTime openDate = DateTime.Now;
+            DateTime? closeDate = null;
+            bool isClosed = false;
+            List<Transaction> transactions = new List<Transaction>();
+            bool canWithdraw = true;
+            int maxWithdrawalsPerMonth = 6;
+            int withdrawalsThisMonth = 0;
+
+            return new SavingsAccount(maxWithdrawalsPerMonth, withdrawalsThisMonth, canWithdraw, accountName, isClosed, interestRate, balance, openDate, closeDate, transactions);
+        }
+        else if (accountType == "2")
+        {
+            return null;
+        }
+        // This should never be reached
+        return null;
+    }
+
+    public virtual void CloseAccount()
     {
         _isClosed = true;
         _closeDate = DateTime.Now;
@@ -48,9 +101,9 @@ public abstract class DepositAccount
 
     }
 
-    public decimal CalculateMonthlyInterestRate()
+    public double CalculateMonthlyInterestRate()
     {
-        decimal monthlyInterestRate = _interestRate / 12;
+        double monthlyInterestRate = _interestRate / 12;
 
         return monthlyInterestRate;
     }
@@ -62,8 +115,8 @@ public abstract class DepositAccount
 
         if (currentDay == 1)
         {
-            decimal monthlyInterestRate = CalculateMonthlyInterestRate();
-            decimal monthlyInterest = _balance * monthlyInterestRate;
+            double monthlyInterestRate = CalculateMonthlyInterestRate();
+            decimal monthlyInterest = _balance * (decimal)monthlyInterestRate;
             _balance += monthlyInterest;
             _transactions.Add(new Transaction(monthlyInterest, "Interest", DateTime.Now));
             Console.WriteLine($"\nInterest of ${monthlyInterest} added on {DateTime.Now}");
