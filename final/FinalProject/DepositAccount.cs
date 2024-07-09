@@ -69,11 +69,34 @@ public abstract class DepositAccount
 
     public virtual void CloseAccount()
     {
-        _isClosed = true;
-        _closeDate = DateTime.Now;
+        if (_balance > 0)
+        {
+            Console.Write($"\nWould you like to withdraw the remaining balance of ${_balance}? (Y/N): ");
+            string withdrawResponse = Console.ReadLine().ToUpper();
+
+            if (withdrawResponse == "Y")
+            {
+                _transactions.Add(new Transaction(-_balance, "Withdrawal", DateTime.Now));
+                Console.WriteLine($"\nWithdrawal of ${_balance} made on {DateTime.Now}");
+                _balance = 0;
+                _isClosed = true;
+                _closeDate = DateTime.Now;
+                Console.WriteLine("\nAccount closed.");
+            }
+            else
+            {
+                Console.WriteLine("\nYou must withdraw the remaining balance before closing the account.");
+            }
+        }
+        else
+        {
+            _isClosed = true;
+            _closeDate = DateTime.Now;
+            Console.WriteLine("\nAccount closed.");
+        }
     }
 
-    public virtual void MakeDeposit()
+    public void MakeDeposit()
     {
         Console.Write("\nEnter the amount you would like to deposit: $");
         decimal depositAmount = Convert.ToDecimal(Console.ReadLine());
@@ -125,5 +148,19 @@ public abstract class DepositAccount
         {
             Console.WriteLine("\nInterest can only be added on the first of the month.");
         }
+    }
+
+    public virtual void DisplayAccountInfo()
+    {
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine($"Account Name: {_accountName}");
+        Console.WriteLine($"Balance: ${_balance}");
+        Console.WriteLine($"Interest Rate: {_interestRate * 100}%");
+        Console.WriteLine($"Open Date: {_openDate}");
+        if (_isClosed)
+        {
+            Console.WriteLine($"Close Date: {_closeDate}");
+        }
+        Console.WriteLine("---------------------------------");
     }
 }

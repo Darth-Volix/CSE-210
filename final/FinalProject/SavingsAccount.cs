@@ -64,6 +64,9 @@ public class SavingsAccount : DepositAccount
                     _transactions.Add(new Transaction(-_balance, "Withdrawal", DateTime.Now));
                     Console.WriteLine($"\nWithdrawal of ${_balance} made on {DateTime.Now}");
                     _balance = 0;
+                    _isClosed = true;
+                    _closeDate = DateTime.Now;
+                    Console.WriteLine("\nAccount closed.");
                 }
             }
             else
@@ -71,7 +74,12 @@ public class SavingsAccount : DepositAccount
                 Console.WriteLine("\nYou must withdraw the remaining balance before closing the account.");
             }
         }
-
+        else
+        {
+            _isClosed = true;
+            _closeDate = DateTime.Now;
+            Console.WriteLine("\nAccount closed.");
+        }
     }
 
     public void ResetWithdrawals()
