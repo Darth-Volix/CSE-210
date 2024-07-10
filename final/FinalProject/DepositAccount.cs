@@ -163,4 +163,16 @@ public abstract class DepositAccount
         }
         Console.WriteLine("---------------------------------");
     }
+
+    public void DisplayTransactions()
+    {
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine($"Transactions for {_accountName}");
+        Console.WriteLine("---------------------------------");
+
+        foreach (Transaction transaction in _transactions)
+        {
+            transaction.DisplayTransaction();
+        }
+    }
 }

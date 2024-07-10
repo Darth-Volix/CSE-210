@@ -47,6 +47,22 @@ public class AccountManager
         }
     }
 
+    public void DisplayTransactions()
+    {
+        Console.WriteLine("\nTransactions:");
+        for (int i = 0; i < _depositAccounts.Count; i++)
+        {
+            Console.WriteLine($"\nAccount ID: 00{i + 1}");
+            _depositAccounts[i].DisplayTransactions();
+        }
+        
+        for (int i = 0; i < _loanAccounts.Count; i++)
+        {
+            Console.WriteLine($"\nLoan ID: 00{i + 1}");
+            _loanAccounts[i].DisplayTransactions();
+        }
+    }
+
     public void MakeDeposit()
     {
         Console.Write("\nEnter the account ID to make a deposit: ");
@@ -141,7 +157,10 @@ public class AccountManager
     {
         for (int i = 0; i < _depositAccounts.Count; i++)
         {
-           if 
+           if (_depositAccounts{i} == SavingsAccount)
+           {
+               _depositAccounts[i].ResetWithdrawals();
+           }
         }
     }
 

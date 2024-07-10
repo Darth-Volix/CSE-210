@@ -7,7 +7,7 @@ public class PersonalLoan : LoanAccount
     private string _loanPurpose;
 
     // Constructor
-    public PersonalLoan(string loanPurpose, string loanName, bool isClosed, int term, decimal interestRate, decimal loanAmount, decimal monthlyPayment, decimal balance, int dueDate, DateTime openDate, DateTime? closeDate, List<Transaction> transactions) : base(loanName, isClosed, term, interestRate, loanAmount, monthlyPayment, balance, dueDate, openDate, closeDate, transactions)
+    public PersonalLoan(string loanPurpose, string loanName, bool isClosed, int term, double interestRate, decimal loanAmount, decimal monthlyPayment, decimal balance, int dueDate, DateTime openDate, DateTime? closeDate, List<Transaction> transactions) : base(loanName, isClosed, term, interestRate, loanAmount, monthlyPayment, balance, dueDate, openDate, closeDate, transactions)
     {
         _loanPurpose = loanPurpose;
         _loanName = loanName;

@@ -7,7 +7,7 @@ public abstract class LoanAccount
     protected string _loanName;
     protected bool _isClosed;
     protected int _term;
-    protected decimal _interestRate;
+    protected double _interestRate;
     protected decimal _loanAmount;
     protected decimal _monthlyPayment;
     protected decimal _balance;
@@ -17,7 +17,7 @@ public abstract class LoanAccount
     protected List<Transaction> _transactions;
 
     // Constructor
-    public LoanAccount(string loanName, bool isClosed, int term, decimal interestRate, decimal loanAmount, decimal monthlyPayment, decimal balance, int dueDate, DateTime openDate, DateTime? closeDate, List<Transaction> transactions)
+    public LoanAccount(string loanName, bool isClosed, int term, double interestRate, decimal loanAmount, decimal monthlyPayment, decimal balance, int dueDate, DateTime openDate, DateTime? closeDate, List<Transaction> transactions)
     {
         _loanName = loanName;
         _isClosed = isClosed;
@@ -65,7 +65,7 @@ public abstract class LoanAccount
             Console.Write("Enter the loan amount: $");
             decimal _loanAmount = Convert.ToDecimal(Console.ReadLine());
             Console.Write("Enter the interest rate in format 0.XX (18% = 0.18): ");
-            decimal _interestRate = Convert.ToDecimal(Console.ReadLine());
+            double _interestRate = Convert.ToDouble(Console.ReadLine());
             Console.Write("Enter the term in years: ");
             int _term = Convert.ToInt32(Console.ReadLine());
             Console.Write("Enter the due date (1-28): ");
@@ -90,7 +90,7 @@ public abstract class LoanAccount
             Console.Write("Enter the loan amount: $");
             decimal _loanAmount = Convert.ToDecimal(Console.ReadLine());
             Console.Write("Enter the interest rate in format 0.XX (18% = 0.18): ");
-            decimal _interestRate = Convert.ToDecimal(Console.ReadLine());
+            double _interestRate = Convert.ToDouble(Console.ReadLine());
             Console.Write("Enter the term in years: ");
             int _term = Convert.ToInt32(Console.ReadLine());
             Console.Write("Enter the due date (1-28): ");
@@ -118,27 +118,27 @@ public abstract class LoanAccount
         Console.WriteLine($"\n{_loanName} has been closed.");
     }
 
-    public static decimal CalculateMonthlyPayment(int _term, decimal _interestRate, decimal _loanAmount)
+    public static decimal CalculateMonthlyPayment(int _term, double _interestRate, decimal _loanAmount)
     {
         int numberOfPayments = _term * 12;
-        decimal monthlyInterestRate = _interestRate / 12;
-        double monthlyPayment = ((double)_loanAmount * (double)monthlyInterestRate * Math.Pow(1 + (double)monthlyInterestRate, numberOfPayments)) / (Math.Pow(1 + (double)monthlyInterestRate, numberOfPayments) - 1);
+        double monthlyInterestRate = _interestRate / 12;
+        double monthlyPayment = ((double)_loanAmount * monthlyInterestRate * Math.Pow(1 + monthlyInterestRate, numberOfPayments)) / (Math.Pow(1 + monthlyInterestRate, numberOfPayments) - 1);
     
         return (decimal)monthlyPayment;
     }
 
     public decimal TenDayPayoff()
     {
-        decimal dailyInterestRate = CalculateDailyInterestRate();
-        decimal tenDayInterest = _balance * dailyInterestRate * 10;
+        double dailyInterestRate = CalculateDailyInterestRate();
+        decimal tenDayInterest = _balance * (decimal)dailyInterestRate * 10;
         decimal tenDayPayoff = _balance + tenDayInterest;
 
         return tenDayPayoff;
     }
 
-    public decimal CalculateDailyInterestRate()
+    public double CalculateDailyInterestRate()
     {
-        decimal dailyInterestRate = _interestRate / 365;
+        double dailyInterestRate = _interestRate / 365;
        
         return dailyInterestRate;
     }
@@ -168,6 +168,10 @@ public abstract class LoanAccount
 
     public void DisplayTransactions()
     {
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine($"Transactions for {_loanName}");
+        Console.WriteLine("---------------------------------");
+        
         foreach (Transaction transaction in _transactions)
         {
             transaction.DisplayTransaction();
