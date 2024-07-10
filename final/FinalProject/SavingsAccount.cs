@@ -28,13 +28,13 @@ public class SavingsAccount : DepositAccount
     {
         if (_withdrawalsThisMonth < _maxWithdrawalsPerMonth)
         {
-            Console.Write("\nEnter the amount you would like to withdraw: $");
+            Console.Write("Enter the amount you would like to withdraw: $");
             decimal withdrawalAmount = Convert.ToDecimal(Console.ReadLine());
 
             if (withdrawalAmount <= _balance)
             {
                 _balance -= withdrawalAmount;
-                _transactions.Add(new Transaction(-withdrawalAmount, "Withdrawal", DateTime.Now));
+                _transactions.Add(new Transaction(withdrawalAmount, "Withdrawal", DateTime.Now));
                 Console.WriteLine($"\nWithdrawal of ${withdrawalAmount:F2} made on {DateTime.Now}");
 
                 _withdrawalsThisMonth++;
@@ -61,7 +61,7 @@ public class SavingsAccount : DepositAccount
 
                 if (withdrawResponse == "Y")
                 {
-                    _transactions.Add(new Transaction(-_balance, "Withdrawal", DateTime.Now));
+                    _transactions.Add(new Transaction(_balance, "Withdrawal", DateTime.Now));
                     Console.WriteLine($"\nWithdrawal of ${_balance:F2} made on {DateTime.Now}");
                     _balance = 0;
                     _isClosed = true;

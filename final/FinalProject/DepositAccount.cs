@@ -52,16 +52,37 @@ public abstract class DepositAccount
             DateTime openDate = DateTime.Now;
             DateTime? closeDate = null;
             bool isClosed = false;
-            List<Transaction> transactions = new List<Transaction>();
             bool canWithdraw = true;
             int maxWithdrawalsPerMonth = 6;
             int withdrawalsThisMonth = 0;
+            List<Transaction> transactions = new List<Transaction>();
+
+            Transaction transaction = new Transaction(balance, "Deposit", openDate);
+            transactions.Add(transaction);
 
             return new SavingsAccount(maxWithdrawalsPerMonth, withdrawalsThisMonth, canWithdraw, accountName, isClosed, interestRate, balance, openDate, closeDate, transactions);
         }
         else if (accountType == "2")
         {
-            return null;
+            Console.Write("\nEnter the amount of your opening deposit: $");
+            decimal balance = Convert.ToDecimal(Console.ReadLine());
+            
+            if (balance < 2500)
+            {
+                Console.WriteLine("\nA minimum deposit of $2500 is required to open a Money Market account.");
+                return null;
+            }
+
+            string accountName = "Money Market Account";
+            double interestRate = 0.01;
+            DateTime openDate = DateTime.Now;
+            DateTime? closeDate = null;
+            bool isClosed = false;
+            List<Transaction> transactions = new List<Transaction>();
+            decimal minimumBalance = 2500;
+            int interestRateTier = 1;
+
+            return new MoneyMarket(minimumBalance, interestRateTier, accountName, isClosed, interestRate, balance, openDate, closeDate, transactions);
         }
         // This should never be reached
         return null;
@@ -108,7 +129,7 @@ public abstract class DepositAccount
 
     public virtual void MakeWithdrawal()
     {
-        Console.Write("\nEnter the amount you would like to withdraw: $");
+        Console.Write("Enter the amount you would like to withdraw: $");
         decimal withdrawalAmount = Convert.ToDecimal(Console.ReadLine());
 
         if (withdrawalAmount <= _balance)
@@ -166,7 +187,7 @@ public abstract class DepositAccount
 
     public void DisplayTransactions()
     {
-        Console.WriteLine("---------------------------------");
+        Console.WriteLine("\n---------------------------------");
         Console.WriteLine($"Transactions for {_accountName}");
         Console.WriteLine("---------------------------------");
 

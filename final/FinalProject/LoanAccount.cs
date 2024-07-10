@@ -85,8 +85,6 @@ public abstract class LoanAccount
         {
             Console.Write("\nEnter the purpose of the loan: ");
             string _loanPurpose = Console.ReadLine();
-            Console.Write("Enter the loan name: ");
-            string _loanName = Console.ReadLine();
             Console.Write("Enter the loan amount: $");
             decimal _loanAmount = Convert.ToDecimal(Console.ReadLine());
             Console.Write("Enter the interest rate in format 0.XX (18% = 0.18): ");
@@ -95,6 +93,7 @@ public abstract class LoanAccount
             int _term = Convert.ToInt32(Console.ReadLine());
             Console.Write("Enter the due date (1-28): ");
             int _dueDate = Convert.ToInt32(Console.ReadLine());
+            string _loanName = "Personal Loan";
             DateTime _openDate = DateTime.Now;
             DateTime? _closeDate = null;
             bool _isClosed = false;

@@ -18,48 +18,72 @@ public class AccountManager
     public void OpenDepositAccount()
     {
         DepositAccount newDepositAccount = DepositAccount.OpenAccount();
-        _depositAccounts.Add(newDepositAccount);
+
+        if (newDepositAccount != null)
+        {
+            _depositAccounts.Add(newDepositAccount);
+        }
     }
 
     public void OpenLoanAccount()
     {
        LoanAccount newLoanAccount = LoanAccount.OpenAccount();
-        _loanAccounts.Add(newLoanAccount);
+       
+       if (newLoanAccount != null)
+        {
+            _loanAccounts.Add(newLoanAccount);
+        }
     }
 
     public void DisplayDepositAccounts()
     {
-        Console.WriteLine("\nDeposit Accounts:");
-        for (int i = 0; i < _depositAccounts.Count; i++)
+        if (_depositAccounts.Count == 0)
         {
-            Console.WriteLine($"\nAccount ID: 00{i + 1}");
-            _depositAccounts[i].DisplayAccountInfo();
+            Console.WriteLine("There are no deposit accounts to display.");
+        }
+        else
+        {
+            Console.WriteLine("\nDeposit Accounts:");
+            for (int i = 0; i < _depositAccounts.Count; i++)
+            {
+                Console.WriteLine($"\nAccount ID: 00{i + 1}");
+                _depositAccounts[i].DisplayAccountInfo();
+            }
         }
     }
 
     public void DisplayLoanAccounts()
     {
-        Console.WriteLine("\nLoan Accounts:");
-        for (int i = 0; i < _loanAccounts.Count; i++)
+        if (_loanAccounts.Count == 0)
         {
-            Console.WriteLine($"\nLoan ID: 00{i + 1}");
-            _loanAccounts[i].DisplayAccountInfo();
+            Console.WriteLine("There are no loan accounts to display.");
+        }
+        else
+        {
+            Console.WriteLine("\nLoan Accounts:");
+            for (int i = 0; i < _loanAccounts.Count; i++)
+            {
+                Console.WriteLine($"\nLoan ID: 00{i + 1}");
+                _loanAccounts[i].DisplayAccountInfo();
+            }
         }
     }
 
-    public void DisplayTransactions()
+    public void DisplayDepositTransactions()
     {
-        Console.WriteLine("\nTransactions:");
-        for (int i = 0; i < _depositAccounts.Count; i++)
+        Console.Write("\nEnter the account ID to display transactions: ");
+        int accountID = Convert.ToInt32(Console.ReadLine()) - 1;
+
+        if (accountID >= 0 && accountID < _depositAccounts.Count)
         {
-            Console.WriteLine($"\nAccount ID: 00{i + 1}");
-            _depositAccounts[i].DisplayTransactions();
+            _depositAccounts[accountID].DisplayTransactions();
+
+            Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
+            Console.ReadKey();
         }
-        
-        for (int i = 0; i < _loanAccounts.Count; i++)
+        else
         {
-            Console.WriteLine($"\nLoan ID: 00{i + 1}");
-            _loanAccounts[i].DisplayTransactions();
+            Console.WriteLine("\nInvalid account ID.");
         }
     }
 
@@ -75,6 +99,8 @@ public class AccountManager
         else
         {
             Console.WriteLine("\nInvalid account ID.");
+            Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
+            Console.ReadKey();
         }
     }
 
@@ -90,6 +116,8 @@ public class AccountManager
         else
         {
             Console.WriteLine("\nInvalid account ID.");
+            Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
+            Console.ReadKey();
         }
     }
 
@@ -138,7 +166,7 @@ public class AccountManager
         }
     }
 
-    public void CloseAccount()
+    public void CloseDepositAccount()
     {
         Console.Write("\nEnter the account ID to close the account: ");
         int accountID = Convert.ToInt32(Console.ReadLine()) - 1;
