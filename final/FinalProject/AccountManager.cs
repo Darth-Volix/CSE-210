@@ -130,7 +130,7 @@ public class AccountManager
 
         if (loanID >= 0 && loanID < _loanAccounts.Count)
         {
-            _loanAccounts[loanID].GetTenDayPayoff();
+            _loanAccounts[loanID].TenDayPayoff();
         }
         else
         {
@@ -153,13 +153,13 @@ public class AccountManager
         }
     }
 
-    public void ResetWithdrawals()
+    public void ResetSavingsWithdrawals()
     {
         for (int i = 0; i < _depositAccounts.Count; i++)
         {
-           if (_depositAccounts{i} == SavingsAccount)
+           if (_depositAccounts[i] is SavingsAccount savingsAccount)
            {
-               _depositAccounts[i].ResetWithdrawals();
+                savingsAccount.ResetWithdrawals();
            }
         }
     }
