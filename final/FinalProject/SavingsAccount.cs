@@ -35,7 +35,7 @@ public class SavingsAccount : DepositAccount
             {
                 _balance -= withdrawalAmount;
                 _transactions.Add(new Transaction(-withdrawalAmount, "Withdrawal", DateTime.Now));
-                Console.WriteLine($"\nWithdrawal of ${withdrawalAmount} made on {DateTime.Now}");
+                Console.WriteLine($"\nWithdrawal of ${withdrawalAmount:F2} made on {DateTime.Now}");
 
                 _withdrawalsThisMonth++;
             }
@@ -56,13 +56,13 @@ public class SavingsAccount : DepositAccount
         {
             if (_canWithdraw)
             {
-                Console.Write($"\nWould you like to withdraw the remaining balance of ${_balance}? (Y/N): ");
+                Console.Write($"\nWould you like to withdraw the remaining balance of ${_balance:F2}? (Y/N): ");
                 string withdrawResponse = Console.ReadLine().ToUpper();
 
                 if (withdrawResponse == "Y")
                 {
                     _transactions.Add(new Transaction(-_balance, "Withdrawal", DateTime.Now));
-                    Console.WriteLine($"\nWithdrawal of ${_balance} made on {DateTime.Now}");
+                    Console.WriteLine($"\nWithdrawal of ${_balance:F2} made on {DateTime.Now}");
                     _balance = 0;
                     _isClosed = true;
                     _closeDate = DateTime.Now;

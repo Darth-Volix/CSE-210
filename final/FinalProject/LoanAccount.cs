@@ -53,12 +53,12 @@ public abstract class LoanAccount
         
         if (accountType == "1")
         {
+            Console.Write("\nEnter the model year of the vehicle: ");
+            int _year = Convert.ToInt32(Console.ReadLine());
             Console.Write("Enter the make of the vehicle: ");
             string _make = Console.ReadLine();
             Console.Write("Enter the model of the vehicle: ");
             string _model = Console.ReadLine();
-            Console.Write("Enter the year of the vehicle: ");
-            int _year = Convert.ToInt32(Console.ReadLine());
             Console.Write("Enter the title type (Clean, Salvaged, RB/RS, etc): ");
             string _titleType = Console.ReadLine();
             string _loanName = $"{_year} {_make} {_model}";
@@ -83,7 +83,7 @@ public abstract class LoanAccount
         }
         else if (accountType == "2")
         {
-            Console.Write("Enter the purpose of the loan: ");
+            Console.Write("\nEnter the purpose of the loan: ");
             string _loanPurpose = Console.ReadLine();
             Console.Write("Enter the loan name: ");
             string _loanName = Console.ReadLine();
@@ -152,7 +152,7 @@ public abstract class LoanAccount
         {
             _balance -= _monthlyPayment;
             _transactions.Add(new Transaction(_monthlyPayment, "Payment", DateTime.Now));
-            Console.WriteLine($"\nPayment of ${_monthlyPayment} made on {DateTime.Now}");
+            Console.WriteLine($"\nPayment of ${_monthlyPayment:F2} made on {DateTime.Now}");
 
             if (_balance == 0)
             {

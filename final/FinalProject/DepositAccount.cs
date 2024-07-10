@@ -48,7 +48,7 @@ public abstract class DepositAccount
             Console.Write("\nEnter the amount of your opening deposit: $");
             decimal balance = Convert.ToDecimal(Console.ReadLine());
             string accountName = "Savings Account";
-            double interestRate = 0.05;
+            double interestRate = 0.005;
             DateTime openDate = DateTime.Now;
             DateTime? closeDate = null;
             bool isClosed = false;
@@ -77,7 +77,7 @@ public abstract class DepositAccount
             if (withdrawResponse == "Y")
             {
                 _transactions.Add(new Transaction(-_balance, "Withdrawal", DateTime.Now));
-                Console.WriteLine($"\nWithdrawal of ${_balance} made on {DateTime.Now}");
+                Console.WriteLine($"\nWithdrawal of ${_balance:F2} made on {DateTime.Now}");
                 _balance = 0;
                 _isClosed = true;
                 _closeDate = DateTime.Now;
@@ -103,7 +103,7 @@ public abstract class DepositAccount
 
         _balance += depositAmount;
         _transactions.Add(new Transaction(depositAmount, "Deposit", DateTime.Now));
-        Console.WriteLine($"\nDeposit of ${depositAmount} made on {DateTime.Now}");
+        Console.WriteLine($"\nDeposit of ${depositAmount:F2} made on {DateTime.Now}");
     }
 
     public virtual void MakeWithdrawal()
@@ -115,7 +115,7 @@ public abstract class DepositAccount
         {
             _balance -= withdrawalAmount;
             _transactions.Add(new Transaction(withdrawalAmount, "Withdrawal", DateTime.Now));
-            Console.WriteLine($"\nWithdrawal of ${withdrawalAmount} made on {DateTime.Now}");
+            Console.WriteLine($"\nWithdrawal of ${withdrawalAmount:F2} made on {DateTime.Now}");
         }
         else
         {
@@ -142,7 +142,7 @@ public abstract class DepositAccount
             decimal monthlyInterest = _balance * (decimal)monthlyInterestRate;
             _balance += monthlyInterest;
             _transactions.Add(new Transaction(monthlyInterest, "Interest", DateTime.Now));
-            Console.WriteLine($"\nInterest of ${monthlyInterest} added on {DateTime.Now}");
+            Console.WriteLine($"\nInterest of ${monthlyInterest:F2} added on {DateTime.Now}");
         }
         else
         {
@@ -154,8 +154,8 @@ public abstract class DepositAccount
     {
         Console.WriteLine("---------------------------------");
         Console.WriteLine($"Account Name: {_accountName}");
-        Console.WriteLine($"Balance: ${_balance}");
-        Console.WriteLine($"Interest Rate: {_interestRate * 100}%");
+        Console.WriteLine($"Balance: ${_balance:F2}");
+        Console.WriteLine($"Interest Rate: {_interestRate * 100:F2}%");
         Console.WriteLine($"Open Date: {_openDate}");
         if (_isClosed)
         {
