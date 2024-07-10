@@ -35,6 +35,11 @@ public class AccountManager
         }
     }
 
+    public int GetDepositAccountCount()
+    {
+        return _depositAccounts.Count;
+    }
+
     public void DisplayDepositAccounts()
     {
         if (_depositAccounts.Count == 0)
@@ -54,18 +59,11 @@ public class AccountManager
 
     public void DisplayLoanAccounts()
     {
-        if (_loanAccounts.Count == 0)
+        Console.WriteLine("\nLoan Accounts:");
+        for (int i = 0; i < _loanAccounts.Count; i++)
         {
-            Console.WriteLine("There are no loan accounts to display.");
-        }
-        else
-        {
-            Console.WriteLine("\nLoan Accounts:");
-            for (int i = 0; i < _loanAccounts.Count; i++)
-            {
-                Console.WriteLine($"\nLoan ID: 00{i + 1}");
-                _loanAccounts[i].DisplayAccountInfo();
-            }
+            Console.WriteLine($"\nLoan ID: 00{i + 1}");
+            _loanAccounts[i].DisplayAccountInfo();
         }
     }
 

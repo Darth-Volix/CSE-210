@@ -35,9 +35,19 @@ class Program
                     Console.Clear();
                     break;
                 case "3":
+                    if (accountManager.GetDepositAccountCount() == 0)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("There are no deposit accounts to display.");
+                        Console.Write("\nPress any key to return to the main menu: ");
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                    }
+
                     string depositChoice = "";
 
-                    while (depositChoice != "5")
+                    while (depositChoice != "7")
                     {
                         Console.Clear();
                         accountManager.DisplayDepositAccounts();
@@ -102,3 +112,5 @@ class Program
         }
     }
 }
+
+// CONTNUE WORKING ON DEPOSIT ACCOUNT MENU OPTIONS AND THEIR OUTPUTS

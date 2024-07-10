@@ -137,10 +137,15 @@ public abstract class DepositAccount
             _balance -= withdrawalAmount;
             _transactions.Add(new Transaction(withdrawalAmount, "Withdrawal", DateTime.Now));
             Console.WriteLine($"\nWithdrawal of ${withdrawalAmount:F2} made on {DateTime.Now}");
+            Console.WriteLine($"\nNew balance: ${_balance:F2}");
+            Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
+            Console.ReadKey();
         }
         else
         {
             Console.WriteLine("\nInsufficient funds.");
+            Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
+            Console.ReadKey();
         }
 
     }
@@ -164,10 +169,15 @@ public abstract class DepositAccount
             _balance += monthlyInterest;
             _transactions.Add(new Transaction(monthlyInterest, "Interest", DateTime.Now));
             Console.WriteLine($"\nInterest of ${monthlyInterest:F2} added on {DateTime.Now}");
+            Console.WriteLine($"\nNew balance: ${_balance:F2}");
+            Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
+            Console.ReadKey();
         }
         else
         {
             Console.WriteLine("\nInterest can only be added on the first of the month.");
+            Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
+            Console.ReadKey();
         }
     }
 
