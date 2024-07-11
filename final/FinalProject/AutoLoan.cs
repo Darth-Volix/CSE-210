@@ -86,11 +86,11 @@ public class AutoLoan : LoanAccount
         Console.WriteLine($"Model: {_model}");
         Console.WriteLine($"Year: {_year}");
         Console.WriteLine($"Title Type: {_titleType}");
-        Console.WriteLine($"Loan Amount: ${_loanAmount:F2}");
+        Console.WriteLine($"Original Loan Amount: ${_loanAmount:F2}");
         Console.WriteLine($"Interest Rate: {_interestRate * 100:F2}%");
         Console.WriteLine($"Term: {_term} years");
         Console.WriteLine($"Monthly Payment: ${_monthlyPayment:F2}");
-        Console.WriteLine($"Balance: ${_balance:F2}");
+        Console.WriteLine($"Current Balance: ${_balance:F2}");
         Console.WriteLine($"Due Date: {_dueDate}");
         Console.WriteLine($"Open Date: {_openDate}");
         if (_isClosed)

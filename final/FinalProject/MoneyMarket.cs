@@ -67,7 +67,7 @@ public class MoneyMarket : DepositAccount
     {
         Console.WriteLine("---------------------------------");
         Console.WriteLine($"Account Name: {_accountName}");
-        Console.WriteLine($"Balance: ${_balance}");
+        Console.WriteLine($"Current Balance: ${_balance}");
         Console.WriteLine($"Minimum Balance: ${_minimumBalance:F2}");
         Console.WriteLine($"Interest Rate Tier: {_interestRateTier}");
         Console.WriteLine($"Interest Rate: {_interestRate * 100:F2}%");

@@ -188,7 +188,7 @@ public abstract class DepositAccount
     {
         Console.WriteLine("---------------------------------");
         Console.WriteLine($"Account Name: {_accountName}");
-        Console.WriteLine($"Balance: ${_balance:F2}");
+        Console.WriteLine($"Current Balance: ${_balance:F2}");
         Console.WriteLine($"Interest Rate: {_interestRate * 100:F2}%");
         Console.WriteLine($"Open Date: {_openDate}");
         if (_isClosed)
