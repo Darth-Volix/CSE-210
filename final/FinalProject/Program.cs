@@ -94,6 +94,8 @@ class Program
                                 break;
                             default:
                                 Console.WriteLine("\nInvalid selection. Please try again.");
+                                Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
+                                Console.ReadKey();
                                 break;
                         }
                     }
@@ -111,7 +113,7 @@ class Program
                     
                     string loanChoice = "";
 
-                    while (loanChoice != "4")
+                    while (loanChoice != "5")
                     {
                         Console.Clear();
                         accountManager.DisplayLoanAccounts();
@@ -120,7 +122,8 @@ class Program
                         Console.WriteLine("     1. Make a payment");
                         Console.WriteLine("     2. Display Transactions");
                         Console.WriteLine("     3. Get Ten-Day Payoff Amount");
-                        Console.WriteLine("     4. Return to main menu");
+                        Console.WriteLine("     4. Close Account");
+                        Console.WriteLine("     5. Return to main menu");
                         Console.Write("Enter your choice: ");
                         loanChoice = Console.ReadLine();
 
@@ -136,13 +139,19 @@ class Program
                                 break;
                             case "3":
                                 Console.Clear();
-                                accountManager.CloseLoanAccount();
+                                accountManager.GetTenDayPayoff();
                                 break;
                             case "4":
+                                Console.Clear();
+                                accountManager.CloseLoanAccount();
+                                break;
+                            case "5":
                                 Console.Clear();
                                 break;
                             default:
                                 Console.WriteLine("\nInvalid selection. Please try again.");
+                                Console.Write("\nPress any key to return to the Loan Accounts menu: ");
+                                Console.ReadKey();
                                 break;
                         }
                     }
@@ -152,6 +161,9 @@ class Program
                     break;
                 default:
                     Console.WriteLine("\nInvalid selection. Please try again.");
+                    Console.Write("\nPress any key to return to the main menu: ");
+                    Console.ReadKey();
+                    Console.Clear();
                     break;
             }
         }

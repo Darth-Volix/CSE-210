@@ -120,6 +120,11 @@ public abstract class DepositAccount
         }
     }
 
+    public bool IsAlreadyClosed()
+    {
+        return _isClosed;
+    }
+
     public void MakeDeposit()
     {
         Console.Write("\nEnter the amount you would like to deposit: $");

@@ -155,6 +155,11 @@ public abstract class LoanAccount
         }
     }
 
+    public bool IsAlreadyClosed()
+    {
+        return _isClosed;
+    }
+
     public static decimal CalculateMonthlyPayment(int _term, double _interestRate, decimal _loanAmount)
     {
         int numberOfPayments = _term * 12;

@@ -127,6 +127,13 @@ public class AccountManager
 
         if (accountID >= 0 && accountID < _depositAccounts.Count)
         {
+            if (_depositAccounts[accountID].IsAlreadyClosed())
+            {
+                Console.WriteLine("\nThis account is closed and cannot accept deposits.");
+                Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
+                Console.ReadKey();
+                return;
+            }
             _depositAccounts[accountID].MakeDeposit();
         }
         else
@@ -144,6 +151,13 @@ public class AccountManager
 
         if (accountID >= 0 && accountID < _depositAccounts.Count)
         {
+            if (_depositAccounts[accountID].IsAlreadyClosed())
+            {
+                Console.WriteLine("\nThis account is closed and cannot accept withdrawals.");
+                Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
+                Console.ReadKey();
+                return;
+            }
             _depositAccounts[accountID].MakeWithdrawal();
         }
         else
@@ -161,6 +175,13 @@ public class AccountManager
 
         if (loanID >= 0 && loanID < _loanAccounts.Count)
         {
+            if (_loanAccounts[loanID].IsAlreadyClosed())
+            {
+                Console.WriteLine("\nThis account is closed and cannot accept payments.");
+                Console.Write("\nPress any key to return to the Loan Accounts menu: ");
+                Console.ReadKey();
+                return;
+            }
             _loanAccounts[loanID].MakePayment();
         }
         else
@@ -178,6 +199,13 @@ public class AccountManager
 
         if (accountID >= 0 && accountID < _depositAccounts.Count)
         {
+            if (_depositAccounts[accountID].IsAlreadyClosed())
+            {
+                Console.WriteLine("\nThis account is closed and cannot accrue interest.");
+                Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
+                Console.ReadKey();
+                return;
+            }
             _depositAccounts[accountID].AddInterest();
         }
         else
@@ -195,6 +223,13 @@ public class AccountManager
 
         if (loanID >= 0 && loanID < _loanAccounts.Count)
         {
+            if (_loanAccounts[loanID].IsAlreadyClosed())
+            {
+                Console.WriteLine("\nThis account is closed and cannot provide a ten day payoff.");
+                Console.Write("\nPress any key to return to the Loan Accounts menu: ");
+                Console.ReadKey();
+                return;
+            }
             _loanAccounts[loanID].TenDayPayoff();
         }
         else
@@ -212,6 +247,13 @@ public class AccountManager
 
         if (accountID >= 0 && accountID < _depositAccounts.Count)
         {
+            if (_depositAccounts[accountID].IsAlreadyClosed())
+            {
+                Console.WriteLine("\nThis account is already closed.");
+                Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
+                Console.ReadKey();
+                return;
+            }
             _depositAccounts[accountID].CloseAccount();
         }
         else
@@ -229,6 +271,13 @@ public class AccountManager
 
         if (loanID >= 0 && loanID < _loanAccounts.Count)
         {
+            if (_loanAccounts[loanID].IsAlreadyClosed())
+            {
+                Console.WriteLine("\nThis account is already closed.");
+                Console.Write("\nPress any key to return to the Loan Accounts menu: ");
+                Console.ReadKey();
+                return;
+            }
             _loanAccounts[loanID].CloseAccount();
         }
         else
@@ -245,8 +294,18 @@ public class AccountManager
         {
            if (_depositAccounts[i] is SavingsAccount savingsAccount)
            {
-                savingsAccount.ResetWithdrawals();
+                if (savingsAccount.IsAlreadyClosed())
+                {
+                    Console.WriteLine($"\nAccount ID 00{i+1} is closed and cannot reset withdrawals.");
+                }
+
+                if (!savingsAccount.IsAlreadyClosed())
+                {
+                    savingsAccount.ResetWithdrawals();
+                }
            }
         }
+        Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
+        Console.ReadKey();
     }
 }
