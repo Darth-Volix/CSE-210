@@ -79,6 +79,3 @@ public class MoneyMarket : DepositAccount
         Console.WriteLine("---------------------------------");
     }
 }
-
-
-// COME BACK AND CORRECT CONSTRUCTOR AND CONVERT LOAN INTEREST RATE TO DOUBLE

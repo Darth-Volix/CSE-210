@@ -120,10 +120,10 @@ public abstract class LoanAccount
         if (_balance > 0)
         {
             Console.WriteLine("\nYou must pay off the loan before closing the account.");
-            Console.Write("\nWould you like to make a full payment now? (y/n)");
-            string response = Console.ReadLine();
+            Console.Write("\nWould you like to make a full payment now? (Y/N): ");
+            string response = Console.ReadLine().ToUpper();
 
-            if (response == "y")
+            if (response == "Y")
             {
                 _balance = 0;
                 _isClosed = true;
@@ -169,13 +169,13 @@ public abstract class LoanAccount
         return (decimal)monthlyPayment;
     }
 
-    public decimal TenDayPayoff()
+    public void TenDayPayoff()
     {
         double dailyInterestRate = CalculateDailyInterestRate();
         decimal tenDayInterest = _balance * (decimal)dailyInterestRate * 10;
         decimal tenDayPayoff = _balance + tenDayInterest;
 
-        return tenDayPayoff;
+        Console.WriteLine($"\nTen day payoff amount: ${tenDayPayoff:F2} if paid by {DateTime.Now.AddDays(10):MM/dd/yyyy}");
     }
 
     public double CalculateDailyInterestRate()
@@ -205,12 +205,14 @@ public abstract class LoanAccount
         else
         {
             Console.WriteLine("\nPayment not made. Today is not the due date.");
+            Console.Write("\nPress any key to return to the Loan Accounts menu: ");
+            Console.ReadKey();
         }
     }
 
     public void DisplayTransactions()
     {
-        Console.WriteLine("---------------------------------");
+        Console.WriteLine("\n---------------------------------");
         Console.WriteLine($"Transactions for {_loanName}");
         Console.WriteLine("---------------------------------");
         

@@ -28,7 +28,7 @@ public class SavingsAccount : DepositAccount
     {
         if (_withdrawalsThisMonth < _maxWithdrawalsPerMonth)
         {
-            Console.Write("Enter the amount you would like to withdraw: $");
+            Console.Write("\nEnter the amount you would like to withdraw: $");
             decimal withdrawalAmount = Convert.ToDecimal(Console.ReadLine());
 
             if (withdrawalAmount <= _balance)
@@ -36,8 +36,12 @@ public class SavingsAccount : DepositAccount
                 _balance -= withdrawalAmount;
                 _transactions.Add(new Transaction(withdrawalAmount, "Withdrawal", DateTime.Now));
                 Console.WriteLine($"\nWithdrawal of ${withdrawalAmount:F2} made on {DateTime.Now}");
+                Console.WriteLine($"New balance: ${_balance:F2}");
 
                 _withdrawalsThisMonth++;
+
+                Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
+                Console.ReadKey();
             }
             else
             {
@@ -104,8 +108,6 @@ public class SavingsAccount : DepositAccount
         else 
         {
             Console.WriteLine("\nWithdrawal count has not been reset as it must be the first of the month.");
-            Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
-            Console.ReadKey();
         }
     }
 }

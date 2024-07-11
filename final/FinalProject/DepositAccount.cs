@@ -133,11 +133,15 @@ public abstract class DepositAccount
         _balance += depositAmount;
         _transactions.Add(new Transaction(depositAmount, "Deposit", DateTime.Now));
         Console.WriteLine($"\nDeposit of ${depositAmount:F2} made on {DateTime.Now}");
+        Console.WriteLine($"New balance: ${_balance:F2}");
+
+        Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
+        Console.ReadKey();
     }
 
     public virtual void MakeWithdrawal()
     {
-        Console.Write("Enter the amount you would like to withdraw: $");
+        Console.Write("\nEnter the amount you would like to withdraw: $");
         decimal withdrawalAmount = Convert.ToDecimal(Console.ReadLine());
 
         if (withdrawalAmount <= _balance)

@@ -231,6 +231,8 @@ public class AccountManager
                 return;
             }
             _loanAccounts[loanID].TenDayPayoff();
+            Console.Write("\nPress any key to return to the Loan Accounts menu: ");
+            Console.ReadKey();
         }
         else
         {
