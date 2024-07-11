@@ -99,8 +99,53 @@ class Program
                     }
                     break;
                 case "4":
-                    Console.Clear();
-                    accountManager.DisplayLoanAccounts();
+                    if (accountManager.GetLoanAccountCount() == 0)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("There are no loan accounts to display.");
+                        Console.Write("\nPress any key to return to the main menu: ");
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                    }
+                    
+                    string loanChoice = "";
+
+                    while (loanChoice != "4")
+                    {
+                        Console.Clear();
+                        accountManager.DisplayLoanAccounts();
+
+                        Console.WriteLine("\nLoan Account Options:");
+                        Console.WriteLine("     1. Make a payment");
+                        Console.WriteLine("     2. Display Transactions");
+                        Console.WriteLine("     3. Get Ten-Day Payoff Amount");
+                        Console.WriteLine("     4. Return to main menu");
+                        Console.Write("Enter your choice: ");
+                        loanChoice = Console.ReadLine();
+
+                        switch (loanChoice)
+                        {
+                            case "1":
+                                Console.Clear();
+                                accountManager.MakePayment();
+                                break;
+                            case "2":
+                                Console.Clear();
+                                accountManager.DisplayLoanTransactions();
+                                break;
+                            case "3":
+                                Console.Clear();
+                                accountManager.CloseLoanAccount();
+                                break;
+                            case "4":
+                                Console.Clear();
+                                break;
+                            default:
+                                Console.WriteLine("\nInvalid selection. Please try again.");
+                                break;
+                        }
+                    }
                     break;
                 case "5":
                     isRunning = false;

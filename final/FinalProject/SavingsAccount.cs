@@ -71,11 +71,15 @@ public class SavingsAccount : DepositAccount
                     _isClosed = true;
                     _closeDate = DateTime.Now;
                     Console.WriteLine("\nAccount closed.");
+                    Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
+                    Console.ReadKey();
                 }
             }
             else
             {
                 Console.WriteLine("\nYou must withdraw the remaining balance before closing the account.");
+                Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
+                Console.ReadKey();
             }
         }
         else
@@ -83,6 +87,8 @@ public class SavingsAccount : DepositAccount
             _isClosed = true;
             _closeDate = DateTime.Now;
             Console.WriteLine("\nAccount closed.");
+            Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
+            Console.ReadKey();
         }
     }
 

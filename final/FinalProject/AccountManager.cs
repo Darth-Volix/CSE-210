@@ -23,6 +23,10 @@ public class AccountManager
         {
             _depositAccounts.Add(newDepositAccount);
         }
+
+        Console.WriteLine("\nDeposit Account opened successfully.");
+        Console.Write("\nPress any key to return to the main menu: ");
+        Console.ReadKey();
     }
 
     public void OpenLoanAccount()
@@ -33,11 +37,20 @@ public class AccountManager
         {
             _loanAccounts.Add(newLoanAccount);
         }
+
+        Console.WriteLine("\nLoan Account opened successfully.");
+        Console.Write("\nPress any key to return to the main menu: ");
+        Console.ReadKey();
     }
 
     public int GetDepositAccountCount()
     {
         return _depositAccounts.Count;
+    }
+
+    public int GetLoanAccountCount()
+    {
+        return _loanAccounts.Count;
     }
 
     public void DisplayDepositAccounts()
@@ -82,6 +95,28 @@ public class AccountManager
         else
         {
             Console.WriteLine("\nInvalid account ID.");
+            Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
+            Console.ReadKey();
+        }
+    }
+
+    public void DisplayLoanTransactions()
+    {
+        Console.Write("\nEnter the loan ID to display transactions: ");
+        int loanID = Convert.ToInt32(Console.ReadLine()) - 1;
+
+        if (loanID >= 0 && loanID < _loanAccounts.Count)
+        {
+            _loanAccounts[loanID].DisplayTransactions();
+
+            Console.Write("\nPress any key to return to the Loan Accounts menu: ");
+            Console.ReadKey();
+        }
+        else
+        {
+            Console.WriteLine("\nInvalid loan ID.");
+            Console.Write("\nPress any key to return to the Loan Accounts menu: ");
+            Console.ReadKey();
         }
     }
 
@@ -131,6 +166,8 @@ public class AccountManager
         else
         {
             Console.WriteLine("\nInvalid loan ID.");
+            Console.Write("\nPress any key to return to the Loan Accounts menu: ");
+            Console.ReadKey();
         }
     }
 
@@ -146,6 +183,8 @@ public class AccountManager
         else
         {
             Console.WriteLine("\nInvalid account ID.");
+            Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
+            Console.ReadKey();
         }
     }
 
@@ -161,6 +200,8 @@ public class AccountManager
         else
         {
             Console.WriteLine("\nInvalid loan ID.");
+            Console.Write("\nPress any key to return to the Loan Accounts menu: ");
+            Console.ReadKey();
         }
     }
 
@@ -176,6 +217,25 @@ public class AccountManager
         else
         {
             Console.WriteLine("\nInvalid account ID.");
+            Console.Write("\nPress any key to return to the Deposit Accounts menu: ");
+            Console.ReadKey();
+        }
+    }
+
+    public void CloseLoanAccount()
+    {
+        Console.Write("\nEnter the loan ID to close the account: ");
+        int loanID = Convert.ToInt32(Console.ReadLine()) - 1;
+
+        if (loanID >= 0 && loanID < _loanAccounts.Count)
+        {
+            _loanAccounts[loanID].CloseAccount();
+        }
+        else
+        {
+            Console.WriteLine("\nInvalid loan ID.");
+            Console.Write("\nPress any key to return to the Loan Accounts menu: ");
+            Console.ReadKey();
         }
     }
 

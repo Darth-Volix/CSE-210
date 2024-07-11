@@ -82,6 +82,9 @@ public abstract class DepositAccount
             decimal minimumBalance = 2500;
             int interestRateTier = 1;
 
+            Transaction transaction = new Transaction(balance, "Deposit", openDate);
+            transactions.Add(transaction);
+
             return new MoneyMarket(minimumBalance, interestRateTier, accountName, isClosed, interestRate, balance, openDate, closeDate, transactions);
         }
         // This should never be reached

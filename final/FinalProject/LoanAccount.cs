@@ -76,6 +76,9 @@ public abstract class LoanAccount
             decimal _balance = _loanAmount;
             List<Transaction> _transactions = new List<Transaction>();
             decimal _monthlyPayment = CalculateMonthlyPayment(_term, _interestRate, _loanAmount);
+
+            Transaction transaction = new Transaction(_loanAmount, "Loan Funding", DateTime.Now);
+            _transactions.Add(transaction);
             
             AutoLoan autoLoan = new AutoLoan(_make, _model, _year, _titleType, _loanName, _isClosed, _term, _interestRate, _loanAmount, _monthlyPayment, _balance, _dueDate, _openDate, _closeDate, _transactions);
             
@@ -100,6 +103,9 @@ public abstract class LoanAccount
             decimal _balance = _loanAmount;
             List<Transaction> _transactions = new List<Transaction>();
             decimal _monthlyPayment = CalculateMonthlyPayment(_term, _interestRate, _loanAmount);
+
+            Transaction transaction = new Transaction(_loanAmount, "Loan Funding", DateTime.Now);
+            _transactions.Add(transaction);
             
             PersonalLoan personalLoan = new PersonalLoan(_loanPurpose, _loanName, _isClosed, _term, _interestRate, _loanAmount, _monthlyPayment, _balance, _dueDate, _openDate, _closeDate, _transactions);
             
@@ -111,10 +117,42 @@ public abstract class LoanAccount
     
     public virtual void CloseAccount()
     {
-        _isClosed = true;
-        _closeDate = DateTime.Now;
+        if (_balance > 0)
+        {
+            Console.WriteLine("\nYou must pay off the loan before closing the account.");
+            Console.Write("\nWould you like to make a full payment now? (y/n)");
+            string response = Console.ReadLine();
 
-        Console.WriteLine($"\n{_loanName} has been closed.");
+            if (response == "y")
+            {
+                _balance = 0;
+                _isClosed = true;
+                _closeDate = DateTime.Now;
+                _transactions.Add(new Transaction(_loanAmount, "Payment", DateTime.Now));
+                Console.WriteLine($"\nPayment of ${_loanAmount:F2} made on {DateTime.Now}");
+                
+                Console.WriteLine($"\n{_loanName} has been closed.");
+                Console.Write("\nPress any key to return to the Loan Accounts menu: ");
+                Console.ReadKey();
+                return;
+            }
+            else
+            {
+                Console.WriteLine("\nYou must pay off the loan before closing the account.");
+                Console.Write("\nPress any key to return to the Loan Accounts menu: ");
+                Console.ReadKey();
+                return;
+            }
+        }
+        else 
+        {
+            _isClosed = true;
+            _closeDate = DateTime.Now;
+
+            Console.WriteLine($"\n{_loanName} has been closed.");
+            Console.Write("\nPress any key to return to the Loan Accounts menu: ");
+            Console.ReadKey();
+        }
     }
 
     public static decimal CalculateMonthlyPayment(int _term, double _interestRate, decimal _loanAmount)

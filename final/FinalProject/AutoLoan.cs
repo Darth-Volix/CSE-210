@@ -34,13 +34,48 @@ public class AutoLoan : LoanAccount
     // Methods
     public override void CloseAccount()
     {
-        _isClosed = true;
-        _closeDate = DateTime.Now;
+        if (_balance > 0)
+        {
+            Console.WriteLine("\nYou must pay off the loan before closing the account.");
+            Console.Write("\nWould you like to make a full payment now? (y/n)");
+            string response = Console.ReadLine();
 
-        Console.Write($"\nEnter the address where the title should be sent: ");
-        _address = Console.ReadLine();
+            if (response == "y")
+            {
+                _balance = 0;
+                _isClosed = true;
+                _closeDate = DateTime.Now;
+                _transactions.Add(new Transaction(_loanAmount, "Payment", DateTime.Now));
+                Console.WriteLine($"\nPayment of ${_loanAmount:F2} made on {DateTime.Now}");
+               
+                Console.Write($"\nEnter the address where the title should be sent: ");
+                _address = Console.ReadLine();
+                
+                Console.WriteLine($"\n{_loanName} has been closed. The title will be sent to {_address}.");
+                Console.Write("\nPress any key to return to the Loan Accounts menu: ");
+                Console.ReadKey();
+                return;
+            }
+            else
+            {
+                Console.WriteLine("\nYou must pay off the loan before closing the account.");
+                Console.Write("\nPress any key to return to the Loan Accounts menu: ");
+                Console.ReadKey();
+                return;
+            }
+        }
+        else 
+        {
+            _isClosed = true;
+            _closeDate = DateTime.Now;
 
-        Console.WriteLine($"\n{_loanName} has been closed. The title will be sent to {_address}.");
+            Console.Write($"\nEnter the address where the title should be sent: ");
+            _address = Console.ReadLine();
+
+            Console.WriteLine($"\n{_loanName} has been closed. The title will be sent to {_address}.");
+            Console.Write("\nPress any key to return to the Loan Accounts menu: ");
+            Console.ReadKey();
+        }
     }
 
     public override void DisplayAccountInfo()
